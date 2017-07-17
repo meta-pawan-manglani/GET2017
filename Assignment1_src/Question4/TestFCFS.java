@@ -24,6 +24,17 @@ public class TestFCFS {
 		int actual[][] = testFcfs.implemetFcfs(arival_time, job_size);
 		Assert.assertArrayEquals(expected, actual);
 	}
+	
+	//test when finished time of a job and arrival time of a job is same
+	@Test
+	public void test3() {
+		int arival_time[] = {0,3,5};
+		int job_size[] = {3,2,1};
+		int expected[][] = { {1,0,0,0,3},{2,3,1,4,5},{3,5,1,6,6}};
+		FCFS testFcfs = new FCFS();
+		int actual[][] = testFcfs.implemetFcfs(arival_time, job_size);
+		Assert.assertArrayEquals(expected, actual);
+	}
 
 }
 

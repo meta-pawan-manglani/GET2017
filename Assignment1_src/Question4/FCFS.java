@@ -30,7 +30,7 @@ Class description
 
 public class FCFS {
 
-	    int[][] implemetFcfs(int arival_time[], int job_size[]) {
+	   protected int[][] implemetFcfs(int arival_time[], int job_size[]) {
 	        int len = arival_time.length;
 	        int result[][] = new int[len][5];
 	        int waiting_time[] = new int[len];
@@ -62,7 +62,7 @@ public class FCFS {
 	            result[index][1] = arival_time[index];
 	          
 	            
-	            if(arival_time[index]<result[index-1][4]) {
+	            if(arival_time[index]<=result[index-1][4]) {
 	                waiting_time[index] += (1 + result[index-1][4] - arival_time[index]);
 	                result[index][2] = waiting_time[index];
 	                //start time
@@ -81,4 +81,18 @@ public class FCFS {
 
 	        return result;
 	    }
+	   
+	   public static void main(String[] args) {
+		   FCFS obj = new FCFS();
+		   int arival_time[] = {0,3,5};
+		   int job_size[] = {3,2,1};
+		   int result[][] = obj.implemetFcfs(arival_time, job_size);
+		   System.out.println("num " + "arrival " + "wait " + "start " + "finish ");
+		   for(int i=0 ; i<3 ; i++) {
+			   for(int j=0 ; j<5 ; j++) {
+				   System.out.print(result[i][j] + "      ");
+			   }
+			   System.out.println();
+		   }
+	   }
 	}
