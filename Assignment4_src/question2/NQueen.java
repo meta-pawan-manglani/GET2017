@@ -1,7 +1,7 @@
 package question2;
 
 public class NQueen {
-	private int SIZE;
+	private int SIZE = 0;
 
 	/*
 	 * This function check if a queen can be placed on board[row][col].
@@ -78,19 +78,30 @@ public class NQueen {
 	 * the form of true ,false.
 	 */
 	public boolean[][] nQueen(int n) {
-		SIZE = n;
-		boolean board[][] = new boolean[SIZE][SIZE];
-
-		if (solveNQ(board, 0) == false) {
-			System.out.println("Solution does not exist");
-		}
-		else {
-			for (int row = 0; row < SIZE; row++) {
-				for (int column = 0; column < SIZE; column++) {
-					System.out.print(" " + board[row][column] + " ");
-				}
-				System.out.println();
+		boolean board[][];
+		try {
+			if(n<0) {
+				throw new NegativeArraySizeException();
 			}
+			SIZE = n;
+			 board = new boolean[SIZE][SIZE];
+			
+			
+
+			if (solveNQ(board, 0) == false) {
+				System.out.println("Solution does not exist");
+			}
+			else {
+				for (int row = 0; row < SIZE; row++) {
+					for (int column = 0; column < SIZE; column++) {
+						System.out.print(" " + board[row][column] + " ");
+					}
+					System.out.println();
+				}
+			}
+		}catch(NegativeArraySizeException e) {
+			System.out.println("Negative Value");
+			board = new boolean[0][0];
 		}
 		return board;
 	}
