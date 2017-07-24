@@ -1,5 +1,7 @@
 package question1;
 
+import question2.Question;
+
 
 /**
  * The Interface Distribution.
@@ -15,8 +17,8 @@ public interface Distribution {
 	 * This function will count the value of single select options
 	 * @param key which have to be count 
 	 */
-	
-	public void countSingleSelect(String key);
+
+	public void countSingleSelect(String key,Question q);
 
 	/**
 	 * Count total.
