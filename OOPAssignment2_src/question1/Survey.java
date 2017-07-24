@@ -84,8 +84,9 @@ public class Survey implements Distribution {
 	}
 
 
-	/**
+	/**isValid
 	 * 
+	 * check if input is valid
 	 * @param s type of String
 	 * @param question object of Question class
 	 * @return
@@ -104,8 +105,9 @@ public class Survey implements Distribution {
 		return result;
 	}
 
-	/**
-	 * 
+	/**userInput
+	 *
+	 * Takes input from user
 	 * @param numberOfUser total number of user
 	 * @param userArray array of user class object
 	 */
