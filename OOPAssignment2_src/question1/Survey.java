@@ -1,19 +1,7 @@
-
 package question1;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.TreeMap;
-import java.util.Scanner;
-
-import java.io.FileWriter;
+import java.io.*;
+import java.util.*;
 
 import question2.Question;
 
@@ -26,243 +14,309 @@ import question2.Question;
  */
 public class Survey implements Distribution {
 
-    /**
-     * The file. containing path to file
-     */
-    private String file, outputFilePath;
+	/**
+	 * The file. containing path to file
+	 */
+	private String file, outputFilePath;
 
-    /**
-     * The question file. specified the question file
-     */
-    private File questionFile;
+	/**
+	 * The question file. specified the question file
+	 */
+	private File questionFile;
 
-    /**
-     * The answer file. specified the answer file
-     */
-    private File answerFile;
+	/**
+	 * The answer file. specified the answer file
+	 */
+	private File answerFile;
 
-    /**
-     * The question. object of Question class
-     */
-    private Question question;
+	/**
+	 * The question. object of Question class
+	 */
+	private Question question;
 
-    /**
-     * The reader. object of BufferedReader helps to read the input file
-     */
-    private BufferedReader reader;
+	/**
+	 * The reader. object of BufferedReader helps to read the input file
+	 */
+	private BufferedReader reader;
 
-    /**
-     * Reads the input from console.
-     */
-    private Scanner in;
+	/**
+	 * Reads the input from console.
+	 */
+	private Scanner in;
 
-    /**
-     * The question list.
-     *
-     * type of list contains question
-     */
-    private ArrayList<Question> question_list;
+	/**
+	 * The question list.
+	 *
+	 * type of list contains question
+	 */
+	private ArrayList<Question> questionList;
 
-    /**
-     * The user feedback.
-     *
-     * It will store the user feedback
-     */
-    private TreeMap<String, Integer> userFeedback;
+	/**
+	 * The option map.
+	 *
+	 * It will store the user option of user
+	 */
+	private HashMap<String, Integer> optionMap;
 
-    /**
-     * The writer.
-     */
-    //It is used to write output to output file
-    private BufferedWriter writer;
+	/**
+	 * The writer.
+	 */
+	//It is used to write output to output file
+	private BufferedWriter writer;
 
-    /**
-     * Instantiates a new survey.
-     *
-     * @param fileName the file name
-     */
-    public Survey(String fileName) {
-        try {
-            file = fileName;
-            questionFile = new File(file);
-            userFeedback = new TreeMap<>();
-            reader = new BufferedReader(new FileReader(questionFile));
-            question_list = new ArrayList<>();
-            in = new Scanner(System.in);
-            outputFilePath = "C://Users//welcome//Desktop//";
-        } catch (FileNotFoundException e) {
-            System.out.println("File Not Found");
-        }
-    }
+	/**
+	 * Instantiates a new survey.
+	 *
+	 * @param fileName the file name
+	 */
+	public Survey(String fileName) {
+		try {
+			file = fileName;
+			questionFile = new File(file);
+			reader = new BufferedReader(new FileReader(questionFile));
+			questionList = new ArrayList<>();
+			in = new Scanner(System.in);
+			outputFilePath = "C:/Users/user22/Desktop/";
+			optionMap = null;
+		} catch (FileNotFoundException e) {
+			System.out.println("File Not Found");
+		}
+	}
 
-    /**
-     * Survey.
-     *
-     * @throws FileNotFoundException the file not found exception
-     */
-    public void survey() throws FileNotFoundException {
-        try {
 
-            //line variable is used to read lines from input file
-            String line, feedback;
-            System.out.println("Enter number of user");
+	/**
+	 * 
+	 * @param s type of String
+	 * @param question object of Question class
+	 * @return
+	 */
+	public boolean isValid(String s,Question question) {
+		boolean result = true;
+		String answer[] = s.split("\\/");
+		optionMap = question.getOptionMap();
 
-            //take input number of user from console
-            int number_of_user = Integer.parseInt(in.nextLine());
+		for(int index=0 ; index<answer.length ; index++) {
+			answer[index] = answer[index].toUpperCase();
+			if(!(optionMap.containsKey(answer[index]))) {
+				result = false;
+			}
+		}
+		return result;
+	}
 
-            //It will make the number of object of user array
-            User userArray[] = new User[number_of_user + 1];
-            //System.out.println(userArray.length);
-            //loop for reading a file 
-            while ((line = reader.readLine()) != null) {
+	/**
+	 * 
+	 * @param numberOfUser total number of user
+	 * @param userArray array of user class object
+	 */
+	public void userInput(int numberOfUser,User[] userArray) {
+		String feedback = "";
+		try {
+			for (int user_count = 1; user_count <= numberOfUser; user_count++) {
 
-                //object of question class
-                question = new Question();
+				//assigning identity to user
+				userArray[user_count] = new User();
+				userArray[user_count].setUserNumber(Integer.toString(user_count));
 
-                //Divide  the line to get the different different field of question like typr,option
-                String sar[] = line.split(",");
+				//Iterator will iterate the object of question class
+				Iterator<Question> itr = questionList.iterator();
 
-                //set the question in question_string variable
-                question.setQuestion_string(sar[0]);
+				answerFile = new File(outputFilePath + "User" + Integer.toString(user_count) + ".txt");
+				writer = new BufferedWriter(new FileWriter(answerFile));
 
-                //set the type of question in type_of_question variable
-                question.setType_of_question(sar[1]);
+				//this loop will print the question and there option if available
+				while (itr.hasNext()) {
+					question = itr.next();
 
-                //this will check if question has options or not
-                if ((sar.length == 3)) {
-                    question.setOptions(sar[2]);
-                }
+					//writer will append the string in file
+					writer.append(question.getquestionString() + " " +question.gettypeOfQuestion());
+					writer.newLine();
 
-                //add the object in question list
-                question_list.add(question);
-            }/*end of while loop*/
+					boolean answerFlag = false;
+					if (!(question.gettypeOfQuestion().equals("text"))) {
 
-            //It will sort the object of question class
-            Collections.sort(question_list);
-            int questionCount = 1;
+						//writer will append the string in file
+						writer.append(question.getOptions());
+						writer.newLine();
 
-            for (int user_count = 1; user_count <= number_of_user; user_count++) {
+						while(!answerFlag) {
+							System.out.print(question.getquestionString()+" ");
+							System.out.println(question.gettypeOfQuestion());
+							System.out.println(question.getOptions());
+							System.out.println("Your Answer = ");
+							feedback = in.nextLine();
+							answerFlag = isValid(feedback,question);
+						}
+					}
+					else {
+						System.out.print(question.getquestionString()+" ");
+						System.out.println("Text");
+						System.out.println("Your Answer = ");
+						feedback = in.nextLine();
+					}
+					//writer will append the string in file
 
-                //assigning identity to user
-                userArray[user_count] = new User();
-                userArray[user_count].setUserNumber(Integer.toString(user_count));
+					writer.append(feedback);
+					writer.newLine();
 
-                //Iterator will iterate the object of question class
-                Iterator<Question> itr = question_list.iterator();
+					if (question.gettypeOfQuestion().equals("Single Select")) {
+						countSingleSelect(feedback,question);
+					}
 
-                answerFile = new File(outputFilePath + "User" + Integer.toString(user_count) + ".txt");
-                writer = new BufferedWriter(new FileWriter(answerFile));
+				}/*  end of while loop   */
+				//closing the writer
+				writer.close();
+			}/* End of for loop   */
+		}catch(IOException | NullPointerException | NumberFormatException e) {
+			//Case1 when IOException occur
+			//Case2 Null pointer exception occur
+			//Case3 Null pointer exception occur
+			e.printStackTrace();
+		}
+	}
 
-                //this loop will print the question and there option if available
-                while (itr.hasNext()) {
-                    question = itr.next();
 
-                    //writer will append the string in file
-                    writer.append(question.getQuestion_string() + " " + "\n");
-                    writer.newLine();
-                    System.out.println(question.getQuestion_string());
 
-                    if (!(question.getType_of_question().equals("text"))) {
+	/**
+	 * Survey.
+	 *
+	 * This will perform survey
+	 */
+	public void survey() {
+		try {
 
-                        //writer will append the string in file
-                        writer.append(question.getOptions());
-                        writer.newLine();
-                        System.out.println(question.getOptions());
-                    }
-                    System.out.println("Your Answer = ");
-                    feedback = in.nextLine();
-                    //writer will append the string in file
+			//line variable is used to read lines from input file
+			String line;
+			System.out.println("Enter number of user");
 
-                    writer.append(feedback);
-                    writer.newLine();
+			//take input number of user from console
+			int numberOfUser = Integer.parseInt(in.nextLine());
 
-                    if (question.getType_of_question().equals("Single Select")) {
-                        countSingleSelect(Integer.toString(questionCount) + feedback);
-                        questionCount++;
-                    }
+			//It will make the number of object of user array
+			User userArray[] = new User[numberOfUser + 1];
+			//System.out.println(userArray.length);
+			//loop for reading a file 
+			while ((line = reader.readLine()) != null) {
 
-                }/*  end of while loop   */
-                questionCount = 1;
-                //closing the writer
-                writer.close();
-            }/* End of for loop   */
+				//object of question class
+				question = new Question();
 
-            countTotal(number_of_user);
-        } catch (IOException | NullPointerException | NumberFormatException e) {
-            //Case1 when IOException occur
-            //Case2 Null pointer exception occur
-            //Case3 Null pointer exception occur
-            e.printStackTrace();
-        } finally {
-            try {
-                //this tries to close the input stream to save resources if it fails then throw IOException
-                reader.close();
-            } catch (IOException e) {
-                System.out.println("Resource Leaked Error");
-            }
-        }/* end of try-catch-finally */
-    }/* end of survey method */
+				//Divide  the line to get the different different field of question like typr,option
+				String sar[] = line.split(",");
 
-     /* (non-Javadoc)
+				//set the question in questionString variable
+				question.setquestionString(sar[0]);
+
+				//set the type of question in typeOfQuestion variable
+				question.settypeOfQuestion(sar[1]);
+
+				//this will check if question has options or not
+				if ((sar.length == 3)) {
+					question.setOptions(sar[2]);
+					optionMap = new HashMap<>();
+
+					/**Splitting option using / as a delimiter**/
+					String optionArray[] = sar[2].split("\\/");
+
+					for(String s: optionArray) {
+						optionMap.put(s.toUpperCase(),0);
+					}
+					question.setOptionMap(optionMap);
+				}
+
+
+
+				//add the object in question list
+				questionList.add(question);
+			}/*end of while loop*/
+
+			//It will sort the object of question class
+			Collections.sort(questionList);
+
+			//It will take input from user
+			userInput(numberOfUser,userArray);
+
+			countTotal(numberOfUser);
+		} catch (IOException | NullPointerException | NumberFormatException e) {
+			//Case1 when IOException occur
+			//Case2 Null pointer exception occur
+			//Case3 Null pointer exception occur
+			e.printStackTrace();
+		} finally {
+			try {
+				//this tries to close the input stream to save resources if it fails then throw IOException
+				reader.close();
+			} catch (IOException e) {
+				System.out.println("Resource Leaked Error");
+			}
+		}/* end of try-catch-finally */
+	}/* end of survey method */
+
+	/* (non-Javadoc)
 	 * @see question1.Distribution#countTotal(int)
-     */
-    @Override
-    public void countTotal(int number_of_user) {
+	 */
+	@Override
+	public void countTotal(int numberOfUser) {
 
-        try {
-            answerFile = new File(outputFilePath + "result.txt");
-            writer = new BufferedWriter(new FileWriter(answerFile));
+		try {
+			answerFile = new File(outputFilePath + "result.txt");
+			writer = new BufferedWriter(new FileWriter(answerFile));
 
-            //String array of map contains key of question
-            String[] key = userFeedback.keySet().toArray(new String[userFeedback.size()]);
-            int value;
-            //Denotes the option of question
-            for (String option : key) {
+			Iterator<Question> iterator = questionList.iterator();
 
-                value = userFeedback.get(option);
-                writer.append(Character.toString(option.charAt(0)) + ")");
-                value = (value * 100) / number_of_user;
-                writer.append(Character.toString(option.charAt(1)) + " -->" + Integer.toString(value) + "%");
-                writer.newLine();
-            }
-            writer.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            System.out.println("File Operation Interrupt");
-        }
+			while(iterator.hasNext()) {
+				question = iterator.next();
+				optionMap = question.getOptionMap();
 
-    }
+				if(!optionMap.isEmpty()  && 
+						(question.gettypeOfQuestion().equalsIgnoreCase("Single Select"))) {
+					writer.append(question.getquestionString() + " ");
+					writer.append(question.getOptions());
+					writer.newLine();
+					String[] key = optionMap.keySet().toArray(new String[optionMap.size()]);
+					int value;
+					//Denotes the option of question
+					for (String option : key) {
+						value = optionMap.get(option);
+						value = (value * 100) / numberOfUser;
+						writer.append(option + " -->" + Integer.toString(value) + "%");
+						writer.newLine();
+					}
+				}
+			}
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("File Operation Interrupt");
+		}
 
-    /* (non-Javadoc)
+	}
+
+	/* (non-Javadoc)
 	 * @see question1.Distribution#countSingleSelect(java.lang.String)
-     */
-    @Override
-    public void countSingleSelect(String feedback) {
-        //A temporary variable
-        int value;
-        //if the key is already in map
-        if (userFeedback.containsKey(feedback)) {
-            value = userFeedback.get(feedback);
-            userFeedback.put(feedback, value + 1);
-        } else {
-            //else put the key
-            userFeedback.put(feedback, 1);
-        }
+	 */
+	@Override
+	public void countSingleSelect(String feedback,Question question) {
 
-    }
+		//if the key is already in map
+		optionMap = question.getOptionMap();
+		//A temporary variable
+		int value = optionMap.get(feedback);
+		optionMap.put(feedback, value+1);
 
-    /**
-     * The main method.
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        try {
-            System.out.println("Here we go");
-            new Survey("Survey.txt").survey();
-        } catch (FileNotFoundException e) {
-            System.out.println("File Not Found");
-        }
-    }
+	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the command line arguments
+	 */
+	public static void main(String args[]) {
+
+		System.out.println("Instruction");
+		System.out.println("In case of Multiple Select question seprate options by forward slash(/)");
+		System.out.println("Here we go");
+
+		new Survey("Survey.txt").survey();
+	}
 }
