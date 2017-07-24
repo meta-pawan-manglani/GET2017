@@ -1,5 +1,7 @@
 package question2;
 
+import java.util.HashMap;
+
 /**
  * The Class Question.
  * 
@@ -9,31 +11,41 @@ package question2;
 public class Question implements Comparable<Question> {
 
     /** The question string. */
-    private String question_string;
+    private String questionString;
     
     /** The type of question. */
-    private String type_of_question;
+    private String typeOfQuestion;
     
     /** The options. */
     private String options;
     
+    /** The option map. */
+    private HashMap<String,Integer> optionMap = new HashMap<>();
+
+	public HashMap<String, Integer> getOptionMap() {
+		return optionMap;
+	}
+
+	public void setOptionMap(HashMap<String, Integer> optionMap) {
+		this.optionMap = optionMap;
+	}
 
 	/**
 	 * Gets the type of question.
 	 *
 	 * @return the type of question
 	 */
-	public String getType_of_question() {
-		return this.type_of_question;
+	public String gettypeOfQuestion() {
+		return this.typeOfQuestion;
 	}
 
 	/**
 	 * Sets the type of question.
 	 *
-	 * @param type_of_question the new type of question
+	 * @param typeOfQuestion the new type of question
 	 */
-	public void setType_of_question(String type_of_question) {
-		this.type_of_question = type_of_question;
+	public void settypeOfQuestion(String typeOfQuestion) {
+		this.typeOfQuestion = typeOfQuestion;
 	}
 
 	/**
@@ -57,10 +69,10 @@ public class Question implements Comparable<Question> {
 	/**
 	 * Sets the question string.
 	 *
-	 * @param question_string the new question string
+	 * @param questionString the new question string
 	 */
-	public void setQuestion_string(String question_string) {
-		this.question_string = question_string;
+	public void setquestionString(String questionString) {
+		this.questionString = questionString;
 	}
 
 	/**
@@ -68,8 +80,8 @@ public class Question implements Comparable<Question> {
 	 *
 	 * @return the question string
 	 */
-	public String getQuestion_string() {
-        return this.question_string;
+	public String getquestionString() {
+        return this.questionString;
     }
       
     /* (non-Javadoc)
@@ -78,7 +90,7 @@ public class Question implements Comparable<Question> {
     @Override
     public int compareTo(Question t) throws NullPointerException {
 
-        String aStr = question_string, bStr = t.question_string;
+        String aStr = questionString, bStr = t.questionString;
         return aStr.compareTo(bStr);
     }
 }
