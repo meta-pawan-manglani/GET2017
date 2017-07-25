@@ -1,0 +1,6 @@
+Q1. Your Name?,text
+Q2. Age,text
+Q3. Overall Rating,Single Select,(1/2/3/4/5)
+Q4. Area of improvement,Multi Select,(Service Quality/ Communication/ Delivery Process)
+Q5. Feedback,text
+Q6. What types of credit cards do you have (Select all that apply)?,Multi Select,1)Visa 2) Mastercard 3) RuPay
