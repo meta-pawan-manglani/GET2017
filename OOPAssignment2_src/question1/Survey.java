@@ -76,7 +76,7 @@ public class Survey implements Distribution {
 			reader = new BufferedReader(new FileReader(questionFile));
 			questionList = new ArrayList<>();
 			in = new Scanner(System.in);
-			outputFilePath = "C:/Users/user22/Desktop/";
+			outputFilePath = "C:/Users/Avish/Desktop/";
 			optionMap = null;
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found");
@@ -86,14 +86,21 @@ public class Survey implements Distribution {
 
 	/**isValid
 	 * 
-	 * check if input is valid
 	 * @param s type of String
 	 * @param question object of Question class
-	 * @return
+	 * @return boolean value about the input whether it is right or not
 	 */
-	public boolean isValid(String s,Question question) {
+	private boolean isValid(String s,Question question) throws NullPointerException{
 		boolean result = true;
-		String answer[] = s.split("\\/");
+		String answer[];
+		if(!(("single select").equalsIgnoreCase(question.gettypeOfQuestion()))) {
+			//If questionType is not single than split the string
+			answer = s.split("\\/");
+		}else {
+			//if question type is single than put the string in answer array without splitting
+			answer = new String[1];
+			answer[0] = s.trim();
+		}
 		optionMap = question.getOptionMap();
 
 		for(int index=0 ; index<answer.length ; index++) {
@@ -106,75 +113,68 @@ public class Survey implements Distribution {
 	}
 
 	/**userInput
-	 *
-	 * Takes input from user
+	 * 
 	 * @param numberOfUser total number of user
 	 * @param userArray array of user class object
 	 */
-	public void userInput(int numberOfUser,User[] userArray) {
+	private void userInput(int numberOfUser,User[] userArray) throws IOException,NullPointerException
+	                                                                               ,NumberFormatException{
 		String feedback = "";
-		try {
-			for (int user_count = 1; user_count <= numberOfUser; user_count++) {
+		for (int user_count = 1; user_count <= numberOfUser; user_count++) {
 
-				//assigning identity to user
-				userArray[user_count] = new User();
-				userArray[user_count].setUserNumber(Integer.toString(user_count));
+			//assigning identity to user
+			userArray[user_count] = new User();
+			userArray[user_count].setUserNumber(Integer.toString(user_count));
 
-				//Iterator will iterate the object of question class
-				Iterator<Question> itr = questionList.iterator();
+			//Iterator will iterate the object of question class
+			Iterator<Question> itr = questionList.iterator();
 
-				answerFile = new File(outputFilePath + "User" + Integer.toString(user_count) + ".txt");
-				writer = new BufferedWriter(new FileWriter(answerFile));
+			answerFile = new File(outputFilePath + "User" + Integer.toString(user_count) + ".txt");
+			writer = new BufferedWriter(new FileWriter(answerFile));
 
-				//this loop will print the question and there option if available
-				while (itr.hasNext()) {
-					question = itr.next();
+			//this loop will print the question and there option if available
+			while (itr.hasNext()) {
+				question = itr.next();
+
+				//writer will append the string in file
+				writer.append(question.getquestionString() + " " +question.gettypeOfQuestion());
+				writer.newLine();
+
+				boolean answerFlag = false;
+				if (!(question.gettypeOfQuestion().equals("text"))) {
 
 					//writer will append the string in file
-					writer.append(question.getquestionString() + " " +question.gettypeOfQuestion());
+					writer.append(question.getOptions());
 					writer.newLine();
 
-					boolean answerFlag = false;
-					if (!(question.gettypeOfQuestion().equals("text"))) {
-
-						//writer will append the string in file
-						writer.append(question.getOptions());
-						writer.newLine();
-
-						while(!answerFlag) {
-							System.out.print(question.getquestionString()+" ");
-							System.out.println(question.gettypeOfQuestion());
-							System.out.println(question.getOptions());
-							System.out.println("Your Answer = ");
-							feedback = in.nextLine();
-							answerFlag = isValid(feedback,question);
-						}
-					}
-					else {
+					while(!answerFlag) {
 						System.out.print(question.getquestionString()+" ");
-						System.out.println("Text");
+						System.out.println(question.gettypeOfQuestion());
+						System.out.println(question.getOptions());
 						System.out.println("Your Answer = ");
-						feedback = in.nextLine();
+						feedback = in.nextLine().trim().toUpperCase();
+						answerFlag = isValid(feedback,question);
 					}
-					//writer will append the string in file
+				}
+				else {
+					System.out.print(question.getquestionString()+" ");
+					System.out.println("Text");
+					System.out.println("Your Answer = ");
+					feedback = in.nextLine();
+				}
+				//writer will append the string in file
 
-					writer.append(feedback);
-					writer.newLine();
+				writer.append(feedback);
+				writer.newLine();
 
-					if (question.gettypeOfQuestion().equals("Single Select")) {
-						countSingleSelect(feedback,question);
-					}
+				if (question.gettypeOfQuestion().equals("Single Select")) {
+					countSingleSelect(feedback,question);
+				}
 
-				}/*  end of while loop   */
-				//closing the writer
-				writer.close();
-			}/* End of for loop   */
-		}catch(IOException | NullPointerException | NumberFormatException e) {
-			//Case1 when IOException occur
-			//Case2 Null pointer exception occur
-			//Case3 Null pointer exception occur
-			e.printStackTrace();
-		}
+			}/*  end of while loop   */
+			//closing the writer
+			writer.close();
+		}/* End of for loop   */
 	}
 
 
@@ -213,7 +213,7 @@ public class Survey implements Distribution {
 				question.settypeOfQuestion(sar[1]);
 
 				//this will check if question has options or not
-				if ((sar.length == 3)) {
+				if (!(question.gettypeOfQuestion().equalsIgnoreCase("text"))) {
 					question.setOptions(sar[2]);
 					optionMap = new HashMap<>();
 
@@ -221,9 +221,11 @@ public class Survey implements Distribution {
 					String optionArray[] = sar[2].split("\\/");
 
 					for(String s: optionArray) {
-						optionMap.put(s.toUpperCase(),0);
+						s = s.toUpperCase();
+						optionMap.put(s,0);
 					}
 					question.setOptionMap(optionMap);
+					
 				}
 
 
@@ -319,6 +321,6 @@ public class Survey implements Distribution {
 		System.out.println("In case of Multiple Select question seprate options by forward slash(/)");
 		System.out.println("Here we go");
 
-		new Survey("Survey.txt").survey();
+		new Survey("C:/Users/Avish/Desktop/Survey.txt").survey();
 	}
 }
