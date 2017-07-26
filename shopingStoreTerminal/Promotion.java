@@ -1,10 +1,15 @@
 
 package shopingStoreTerminal;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * The Interface Promotion.
+ * 
+ * 
+ * @author Pawan Manglani
+ * @version 1.1 26-JUL-2017
  */
 public interface Promotion {
 	
@@ -22,8 +27,9 @@ public interface Promotion {
 	 *
 	 * @param product the product
 	 * @return the discount price
+	 * @throws IOException 
 	 */
-	public double getProductDiscount(Product product);
+	public double getProductDiscount(Product product,int quantity) throws IOException;
 	
 	/**
 	 * Gets the order discount.

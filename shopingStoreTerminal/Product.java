@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 /**
  * The Class Product.
+ * 
+ * This class stores the detail about product
+ * 
+ * @author Pawan Manglani
+ * @version 1.1 26-JUL-2017
  */
 public class Product{
 

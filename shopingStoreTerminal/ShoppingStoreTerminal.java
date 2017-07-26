@@ -11,6 +11,10 @@ import java.util.Set;
 
 /**
  * The Class ShoppingStoreTerminal Main class.
+ *
+ * 
+ * @author Pawan Manglani
+ * @version 1.1 26-JUL-2017
  */
 public class ShoppingStoreTerminal extends Billing{
 
@@ -75,21 +79,22 @@ public class ShoppingStoreTerminal extends Billing{
 		do {
 			try {
 				numberOfOrders = Integer.parseInt(console.nextLine());
-				flag = false;
 				if(numberOfOrders<=0) {
-					throw new IllegalArgumentException("Number of different id should be greater than 0");
+					throw new NumberFormatException("Number of different id should be greater than 0");
 				}
+				flag = false;
 			}catch(NumberFormatException e) {
 				System.out.println("Please enter a valid input");
 			}
 		}while(flag);
-		flag = true;
+		
 		String purchaseId;
 		int quantity = 0;
 		tempMap = new HashMap<>();
 
 		/**This loop is responsible to take user input**/
 		for (int index = 0; index < numberOfOrders; index++) {
+			flag = true;
 			System.out.println("Enter Id");
 			order = new OrderEntry();
 

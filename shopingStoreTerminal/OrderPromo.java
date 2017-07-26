@@ -3,6 +3,11 @@ package shopingStoreTerminal;
 
 /**
  * The Class OrderPromo.
+ * 
+ * This class store the promotion on order level
+ * 
+ * @author Pawan Manglani
+ * @version 1.1 26-JUL-2017
  */
 public class OrderPromo {
 	

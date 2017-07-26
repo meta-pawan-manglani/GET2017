@@ -2,6 +2,11 @@ package shopingStoreTerminal;
 
 /**
  * The Class OrderEntry.
+ * 
+ * This class stores the order taken as input from user
+ * 
+ * @author Pawan Manglani
+ * @version 1.1 26-JUL-2017
  */
 public class OrderEntry {
 	

@@ -10,6 +10,11 @@ import java.util.Iterator;
 
 /**
  * The Class Billing.
+ * 
+ * This class prints the bill of purchasing
+ * 
+ * @author Pawan Manglani
+ * @version 1.1 26-JUL-2017
  */
 public class Billing implements Promotion{
 
@@ -57,25 +62,47 @@ public class Billing implements Promotion{
 	 * @see shopingStoreTerminal.Promotion#getDiscount(shopingStoreTerminal.Product)
 	 */
 	@Override
-	public double getProductDiscount(Product product) {
+	public double getProductDiscount(Product product,int quantity) throws IOException {
 		temp = product.getFixedDiscount();
 		traversal = temp.iterator();
+		String result="";
 		double discount = 0,productLevelDiscount = 0;
 		while(traversal.hasNext()) {
 			System.out.println();
-			discount = (double) traversal.next();
+			discount =((double) traversal.next());
+			result += "Rs " + discount + " off on " + product.getProductName() + "\n";
+			writer.append(result);
+			writer.newLine();
+			System.out.print(result);
+			System.out.println();
+			
+			discount = (quantity*discount);
 			productLevelDiscount += discount;
-			System.out.print("Rs " + discount);
-			System.out.println(" off on " + product.getProductName());
+			
+			result = " Discount : " + productLevelDiscount;
+			writer.append(result);
+			writer.newLine();
+			System.out.println(result);
+			System.out.println();
 		}
 		temp = product.getPercentageDiscount();
 		traversal = temp.iterator();
 		while(traversal.hasNext()) {
+			result = "";
 			discount = (double) traversal.next();
 			productLevelDiscount += product.getDiscountedProductPrice(discount);
+			result += discount + "\n";
+			writer.append(result);
+			writer.newLine();
+			
+			System.out.print(result);
 			System.out.println();
-			System.out.print(discount);
-			System.out.println(" % off on " + product.getProductName());
+			
+			result = " % off on " + product.getProductName();
+			writer.append(result);
+			writer.newLine();
+			System.out.println(result);
+			System.out.println();
 		}
 		return productLevelDiscount;
 	}
@@ -85,20 +112,34 @@ public class Billing implements Promotion{
 	public double getOrderDiscount(ArrayList<OrderPromo> orderPromo,double totalCost) {
 		traversal = orderPromo.iterator();
 		double discount = 0,threshold = 0,maxDiscount = 0;
+		String result = "";
+		boolean fixedDiscount = false;
 		while(traversal.hasNext()) {
+			fixedDiscount = false;
 			orderPromoObject = (OrderPromo) traversal.next();
 			threshold = orderPromoObject.getThresholdAmount();
 			if(totalCost > threshold) {
 				if(OrderFixedAmountPromotion.equalsIgnoreCase(orderPromoObject.getPromotionType())) {
 					discount = orderPromoObject.getDiscountAmount();
+					fixedDiscount = true;
 				} else {
 					discount = (totalCost*orderPromoObject.getDiscountAmount())/100;
 				}
 				if(discount > maxDiscount) {
 					maxDiscount = discount;
+					if(fixedDiscount) {
+						result = "" + orderPromoObject.getDiscountAmount() + " off on orders above ";
+						result += orderPromoObject.getThresholdAmount();
+					}else {
+						result = "" + orderPromoObject.getDiscountAmount() + "% off on orders above ";
+						result += orderPromoObject.getThresholdAmount();
+					}
 				}
 			}
 		}
+		
+		System.out.println(result);
+		System.out.println("Discount : " + maxDiscount);
 
 		return maxDiscount;
 	}
@@ -186,7 +227,7 @@ public class Billing implements Promotion{
 
 			/****Check if discount is available***/
 			if(isApplicable(product)) {
-				productLevelDiscount += getProductDiscount(product);
+				productLevelDiscount += getProductDiscount(product,orderObject.getQuantity());
 			}else {
 				answer = "No Product Discount on this Product " + "\n";
 				writer.append(answer);
@@ -197,6 +238,7 @@ public class Billing implements Promotion{
 
 
 		/****Check for Order Level Discount***/
+		totalCost = totalCost - productLevelDiscount;
 		orderLevelDiscount = getOrderDiscount(orderPromo,totalCost);
 		
 		totalDiscount = (productLevelDiscount + orderLevelDiscount);
@@ -226,7 +268,7 @@ public class Billing implements Promotion{
 		System.out.print(answer);
 		
 		
-		answer = "Total :" + (totalCost - totalDiscount);
+		answer = "Total :" + (totalCost - orderLevelDiscount);
 		writer.append(answer);
 		writer.newLine();
 		System.out.println(answer);
