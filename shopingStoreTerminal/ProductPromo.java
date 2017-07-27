@@ -81,9 +81,8 @@ public class ProductPromo {
 	 */
 	@Override
 	public String toString() {
-		return "ProductPromo [promotionType=" + promotionType
-				+ ", discountAmount=" + discountAmount + ", productIds="
-				+ productIds + "]";
+		return "   "+ promotionType
+				+ "                " + discountAmount + "              ";
 	}
 
 
