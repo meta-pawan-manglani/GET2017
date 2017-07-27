@@ -71,7 +71,7 @@ public class ShoppingStoreTerminal extends Billing{
 	 */
 	private void takeOrder() throws IllegalArgumentException{
 		System.out.println("Enter number of different Id's to purchase");
-		
+
 		orderList = new ArrayList<>();
 		boolean flag = true;
 		int numberOfOrders = 0;
@@ -87,7 +87,7 @@ public class ShoppingStoreTerminal extends Billing{
 				System.out.println("Please enter a valid input");
 			}
 		}while(flag);
-		
+
 		String purchaseId;
 		int quantity = 0;
 		tempMap = new HashMap<>();
@@ -169,7 +169,13 @@ public class ShoppingStoreTerminal extends Billing{
 		productList = reader.readProducts();
 		idProductMap = new HashMap<>();
 
-		/**This loop will store all the objects of product in a list productList***/
+		/**Printing the file on console **/
+		System.out.print(" ProductId                   ");
+		System.out.print(" ProductName                  ");
+		System.out.println(" ProductPrice                 ");
+
+
+		/**This loop also store all the objects of product in a list productList and print them on console***/
 		Iterator<Product> itr = productList.iterator();
 		while (itr.hasNext()) {
 			p = itr.next();
@@ -193,12 +199,19 @@ public class ShoppingStoreTerminal extends Billing{
 		System.out.println("Product promo table");
 		reader = new Reader(filePath + fileName);
 		promoList = reader.readPromo();
+
+
+		/**Printing the file on console **/
+		System.out.print(" PromotionType                   ");
+		System.out.print(" DiscountAmount                  ");
+		System.out.println(" ProductName                  ");
 		Iterator<ProductPromo> itr = promoList.iterator();
 		while (itr.hasNext()) {
 			productPromo = itr.next();
 			temp = productPromo.getProductIds();
 
 			/**This loop will store all the objects of productPromo in  promoList***/
+
 			Iterator<String> idIterator = temp.iterator();
 			while (idIterator.hasNext()) {
 				String id = idIterator.next();
@@ -215,8 +228,10 @@ public class ShoppingStoreTerminal extends Billing{
 						p.setPercentageDiscount(productPromo.getDiscountAmount());
 					}
 				}
+				System.out.print(productPromo.toString());
+				System.out.println(p.getProductName());
 			}
-			System.out.println(productPromo.toString());
+
 		}
 		reader.close();
 		System.out.println();
@@ -236,6 +251,11 @@ public class ShoppingStoreTerminal extends Billing{
 		System.out.println("Order promo table");
 		reader = new Reader(filePath + fileName);
 		orderPromoList = reader.readOrderPromo();
+
+		/***Just for Printing the File on console**/
+		System.out.print("PromotionType                  ");
+		System.out.print("DiscountAmount               ");
+		System.out.println("ThresholdAmount              ");
 		Iterator<OrderPromo> itr = orderPromoList.iterator();
 		while (itr.hasNext()) {
 			System.out.println(itr.next().toString());
@@ -252,11 +272,11 @@ public class ShoppingStoreTerminal extends Billing{
 	 */
 	public static void main(String args[]) throws IOException {
 		try {
-			
+
 			/***Path to folder contains all files***/
 			String filePath = "C:/Users/User22/Desktop/Assignment3/";
 			String fileName = "ProductList.csv";
-			
+
 			ShoppingStoreTerminal obj = new ShoppingStoreTerminal();
 			obj.doReadProductList(filePath, fileName);
 			fileName = "ProductPromo.csv";
@@ -267,20 +287,20 @@ public class ShoppingStoreTerminal extends Billing{
 			String choice;
 			boolean flag = true;
 			obj.console = new Reader(System.in);
-			
+
 			/**Multiple Use Application**/
 			do{
-			    obj.takeOrder();
-			    Billing invoice = new Billing();
-			    invoice.printBill(obj.idProductMap, obj.orderList,obj.orderPromoList,userCount);
-			    System.out.println("Do you want to continue if yes press 1 else press any other key");
-			    choice = obj.console.nextLine();
-			    if(!("1".equals(choice))) {
-			    	flag = false;
-			    }
-			    userCount++;
+				obj.takeOrder();
+				Billing invoice = new Billing();
+				invoice.printBill(obj.idProductMap, obj.orderList,obj.orderPromoList,userCount);
+				System.out.println("Do you want to continue if yes press 1 else press any other key");
+				choice = obj.console.nextLine();
+				if(!("1".equals(choice))) {
+					flag = false;
+				}
+				userCount++;
 			}while(flag);
-			
+			obj.console.close();
 			System.out.println("Thank You for Shopping");
 		} catch (FileNotFoundException | NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
