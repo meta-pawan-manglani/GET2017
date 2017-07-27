@@ -79,8 +79,8 @@ public class OrderPromo {
 	 */
 	@Override
 	public String toString() {
-		return "OrderPromo [promotionType=" + promotionType
-				+ ", discountAmount=" + discountAmount + ", thresholdAmount="
-				+ thresholdAmount + "]";
+		return "" + promotionType
+				+ "            " + discountAmount + "             "
+				+ thresholdAmount + "";
 	}
 }
