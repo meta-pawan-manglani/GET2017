@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+
+<html>
+<!--
+Author Pawan Manglani.
+Date 31-JUL-2017
+Assignment 2 HTML-CSS-SESSION-1
+-->
+<head>
+  <title>Assignment2</title>
+</head>
+<body style="width: 70%;margin-left:15%;">
+               <!--Table Containing Header of Page-->
+              <table id="header" style="width: 100%; height: 100%;" border"1" frame = "below" cellspacing = "10">
+                   <tr >
+                       <td align="left"><img src="../Images/html5.png" width="55" height="55" alt="Header Pic"/></td>
+                      <td align="right">
+                           <a href="#">Home</a>
+                           <a href="#">About</a>
+                           <a href="#">Product</a>
+                           <a href="#">Gallery</a>
+                           <a href="#">Contact Us</a>
+                       </td>
+                    </tr>
+                </table> <!--End of Header Table-->
+
+                  <!--Table Containing Cover Pic of Page-->
+              <table id="cover" style="width: 100%; height: 100%;"  cellspacing = "10">
+                    <tr align = "center">
+                        <td>
+                            <img src="../Images/ContactUs.png" width="647" height="189" alt="Cover Pic">
+                        </td>
+                    </tr>
+                </table><!--End of Table-->
+
+
+                <!-------------------------Contact Form---------------------->
+                <form>
+                <table align="center" id = "form"  style="width: 40%; height: 100%;">
+                    <tr>
+                        <td> Name </td>
+                        <td> <input type="text" id="name" name="name" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Email-Id</td>
+                        <td> <input type="text" id="email" name="email" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>City</td>
+                        <td><select> <!--Html Select tag to shows a list of cities-->
+                            <option>Jaipur</option>
+                            <option>Udaipur</option>
+                            <option>Delhi</option>
+                            <option>Mumbai</option>
+                            <option>Noida</option>
+                        </select></td> <!--End of select tag-->
+                    </tr>
+                    <tr>
+                       <td>Organisation Name </td>
+                        <td> <input type="text" id="organisation name" name="organisation name" value=""></td>
+                    </tr>
+                    <tr>
+                        <td> Contact Number </td>
+                        <td> <input type="text" id="contact number" name="Contact Number" value=""></td>
+                    </tr>
+                    <tr>
+                        <td> Message </td>
+                        <td> <input type="text" id="message" name="message" value=""></td>
+                    </tr>
+                    <tr colspan="2">
+                        <td> <input type="submit"  value="Submit"></td><!--HTML submit Button to submit the form-->
+                        <br>
+                    </tr>
+                </table>
+          </form>   <!--End of Form-->
+
+                <!-------------------Footer Table----------------------->
+                <table style="width: 100%; height: 100%;" border"1" frame = "above" cellspacing = "5">
+
+                    <tr align="center"><td>@copyright 2016-17 | All right reserved | metacube training</td></tr>
+               </table>
+
+
+</body>
+</html>

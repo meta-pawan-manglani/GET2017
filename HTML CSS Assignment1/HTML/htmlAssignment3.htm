@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Untitled</title>
+</head>
+
+<body>
+       <form action="" method="post">
+
+        <legend>General Form</legend>
+        <div>
+            <label for="firstname">First Name (required):</label>
+            <input id="firstname" name="firstname" value=""  required=”true” pattern="[A-Za-z-0-9]" placeholder="FirstName" title="firstname">
+        </div>
+        <div>
+            <label for="Lastname">Last Name (required):</label>
+            <input id="lastname" name="lastname" value=""  required=”true” pattern="[A-Za-z-0-9]" placeholder="LastName" title="lastname">
+        </div>
+        <div>
+            <label for="email">Email (required):</label>
+           <input type="email" id="email" name="email" required="true" placeholder="me@me.com">
+        </div>
+
+        <div>
+            <label for="Number">Numbers :</label>
+            <input type="number" id="number" name="number" value="" placeholder="Number">
+        </div>
+                 <div>
+            <label for="City">City :</label>
+
+
+                             <select>
+                            <option>Jaipur</option>
+                            <option>Udaipur</option>
+                            <option>Delhi</option>
+                            <option>Mumbai</option>
+                            <option>Noida</option>
+                        </select>
+                  </div>
+                  <div>
+                      <label for="Project">Project Description:</label>
+                            <textarea name="project" rows="3" cols="10" >
+                                </textarea>
+                  </div>
+        <div class="submit">
+            <input type="submit" value="Submit">
+        </div>
+
+</form>
+</body>
+
+</html>
