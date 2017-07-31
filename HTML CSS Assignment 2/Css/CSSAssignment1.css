@@ -1,0 +1,22 @@
+.topBox{
+     height: 80px;
+     width: 80%;
+     border: 1px solid;
+	 font-size:150%;
+     background-color:#77b6ea;
+	 padding-left:20px; 
+}
+.table{
+    width: auto;
+    height:800px;
+
+}
+.row{
+        width:80%;
+        float: left;
+}
+.col{
+    width: 30%;
+    float: left;
+    height:165px;
+}
