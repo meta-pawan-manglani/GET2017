@@ -1,0 +1,129 @@
+body{
+background-color:cream;
+}
+.nav-bar{
+	background-color:#2d3e50;
+	color:white;
+	height:60px;
+}
+#home{
+padding:20px;
+float:right;
+}
+#tour{
+padding:20px;
+float:right;
+}
+#signup{
+padding:20px;
+float:right;
+}
+#menu{
+ float:left;
+margin-left:20px;
+}
+
+a{
+text-decoration:none;
+color:white;
+}
+a:hover{
+    color:#328dd6;
+}
+
+
+.firstsec{
+	background-color:#328dd6;
+	color:white;
+	height:500px;
+}
+
+#boldtext{
+	height:90px;
+	width:500px;
+	border:2px solid white;
+	position:relative;
+	left:500px;
+	top:180px;
+	text-align:center;
+    font-weight: bold;
+}
+#seccontent{
+	position:relative;
+	top:200px;
+	text-align:center;
+}
+#started{
+margin-left:650px;
+margin-top:250px;
+}
+
+button{
+	background-color:white;
+	color:#328dd6;
+	height:40px;
+	width:200px;
+	border:1px solid #328dd6;
+	border-radius:10px;
+}
+#heading2{
+    padding-top:20px;
+	color:black;
+	text-align:center;
+}
+#speciality{
+display:flex;
+padding:20px;
+}
+#speciality p{
+    color:black;
+}
+#spec1,#spec2,#spec3,#spec4{
+	color:#328dd6;
+}
+.two{
+display:flex;
+background-color:#2d3e50;
+padding:25px;
+}
+#sectiontwo{
+color:white;
+width:800px;
+margin-left:250px;
+padding-left:10px;
+}
+#image{
+margin-left:150px;
+}
+#heading3{
+padding-top:20px;
+text-align:center;
+}
+#sectionthree{
+display:flex;
+color:black;
+padding:10px;
+}
+#form,#contactus{
+padding:10px;
+}
+
+#sectionthree button{
+	background-color:#328dd6;
+	color:white;
+	height:40px;
+	width:150px;
+	border:1px solid #328dd6;
+	border-radius:10px;
+}
+#sectionthree h3{
+	color:#328dd6;
+}
+
+#footer{
+text-align:center;
+padding:10px;
+background-color:#2d3e50;
+height:80px;
+color:white;
+}
