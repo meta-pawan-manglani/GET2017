@@ -1,0 +1,33 @@
+<html>
+    <!--
+Author Pawan Manglani.
+Date 03-AUG-2017
+Assignment 2 HTML-CSS-SESSION-5
+-->
+<body>
+
+<p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Find Me In Google Map</button>
+
+<p id="myLocation"></p>
+
+<script>
+var x = document.getElementById("myLocation");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+
+</body>
+</html>
