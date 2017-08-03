@@ -1,0 +1,155 @@
+body{
+	background: white;
+}
+
+.pad{
+	border: 1px solid white;
+	padding: 2% 2% 2% 2%;
+	background: aqua;
+}
+
+.topBox{
+     height: 115px;
+     width: auto;
+     text-align: center;
+	 background-color: #77b6ea;
+	 font-size:20px;
+	 padding:10px;
+}
+.conatiner{
+	padding:0px 20px 0px 20px;
+	width:85%;
+}
+.mainconatiner{
+	width:95%;
+}
+
+.secondBox{ height: 50px;
+     width: auto;
+     text-align: left;
+     border: 1px solid;
+     border-color: grey;
+     background-color: g;
+	 display:block-inline;	
+	 -webkit-padding-start: 0px;
+			background: #78cff4;
+			  
+		}
+		.secondBox ul{
+			margin-top: 0px;
+			padding: 20px;
+			list-style-type: none;
+		}
+		.secondBox ul li{
+			display: inline;
+			padding: 19px;
+			font-weight: bold;	
+			background: transparent;
+			border: solid 1px #78cff4;
+		}
+		.secondBox ul li:hover{
+			background: #e3ebed;
+			border: solid 1px #000000;
+			cursor: pointer;
+		}
+
+.button {
+    background-color:grey;
+    border: 1px solid;
+    border-color: grey;
+    color: black;
+    padding: 5px ;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    width:auto;
+}
+
+
+.verticalMenu{
+            height:800px;
+            width:auto;
+            text-align: left;
+			display:flex;
+
+
+}
+.left{
+        
+        text-align: left;
+        display: block;
+        width: 20%;
+
+        background-color:white;
+
+}
+.buttonLeft{
+    background-color: white;
+    color: black;
+    
+    text-align: left;
+    display: inline-block;
+    font-size: 16px;
+    width:100%;
+}
+.buttonLeft:hover{
+			background: #e3ebed;
+			border: solid 1px #000000;
+			cursor: pointer;
+		}
+.centeral{
+        flex: 1;
+        text-align: left;
+        display: block;
+        
+        background-color: white;
+
+}
+.buttonCenter{
+    background-color:white;
+    color: black;
+    padding: 5px ;
+    text-align: center;
+    font-size: 16px;
+    width:auto;
+
+}
+.right{
+        
+        text-align: left;
+        display: block;
+        width: 20%;
+        background-color:white;
+		
+
+}
+.buttonRight{
+    background-color:white;
+    color: black;
+    text-align: left;
+    font-size: 16px;
+    width:auto;
+
+}
+.buttonRight:hover{
+			background: #e3ebed;
+			border: solid 1px #000000;
+			cursor: pointer;
+		}
+.block{
+			background-color: #fdfcf9;
+			border: solid 1px #fdfcff;
+		}
+		.block-head{
+			background: #e3efef;
+			padding: 5px;
+			font-size: 15px;
+		}
+		.block-body{
+			
+			
+		}
+		.block:hover .block-body{
+			display: block;
+			cursor: pointer;
+		}
