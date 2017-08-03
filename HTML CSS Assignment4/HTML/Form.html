@@ -1,0 +1,99 @@
+<html>
+<!--
+Author Pawan Manglani.
+Date 03-AUG-2017
+Assignment 1 HTML-CSS-SESSION-4
+-->
+<head>
+<link rel="stylesheet" type="text/css" href="../Css/Form.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>
+HTML-Session4-Assignment1
+</title>
+</head>
+<body>
+<h1>Contact Us Today !</h1>
+<div class="contact">
+    <!--form-->
+<form action="#">
+<table align="center" cellspacing="25px">
+<tr>
+    <!--first name-->
+<td><label for="firstName">FirstName</label><sup>*</sup> </td>
+<td class="icon"><i class="fa fa-user"></i>
+<input type="text" id="firstname" placeholder="First Name" size="20" required pattern="[A-Z-a-z]+" title="Name should be contain only lowercase and uppercase character" autocomplete=off>
+</td>
+</tr>
+    <!--last name-->
+<tr>
+<td><label for="lastName">Last Name<sup>*</sup></label></td>
+<td class="icon"><i class="fa fa-user"></i> <input type="text" id="lastname" placeholder="Last Name" size="20" required pattern="[A-Z-a-z]+" title="Please fill out this field" autocomplete=off></td>
+</tr>
+                    <!--e-mail-->
+<tr>
+<td><label for="email">E-mail<sup>*</sup></label></td>
+<td class="icon"><i class="fa fa-envelope"></i> <input type="email" id="email" placeholder="E-mail Address" size="20" required autocomplete=off></td>
+</tr>
+                                 <!--phone-->
+<tr>
+<td><label for="phone">Phone<sup>*</sup></label></td>
+<td class="icon"><i class="fa fa-phone"></i> <input type="phone" id="phone" placeholder="9876543210" size="30" pattern="[0-9]{6,12}" required title="Enter number between 6-12 digits" autocomplete=off></td>
+</tr>
+                                       <!--address-->
+<tr>
+<td><label for="address">Address</label></td>
+<td class="icon"><i class="fa fa-home"></i> <input type="text" id="address" placeholder="Address" size="30" autocomplete=off></td>
+</tr>
+                                       <!--city-->
+<tr>
+<td><label for="city">City<sup>*</sup></label></td>
+<td class="icon"><i class="fa fa-home"></i> <input type="text" id="city" placeholder="City" size="30" required pattern="[A-Z-a-z]" autocomplete=off></td>
+</tr>
+                                       <!--state-->
+<tr>
+<td><label for="state">State</label></td>
+<td class="icon"><i class="fa fa-list"></i> <select id="state">
+  <option value="Rajasthan">Rajasthan</option>
+  <option value="Bihar">Bihar</option>
+  <option value="Maharashtra">Maharashtra</option>
+  <option value="Gujarat">Gujarat</option>
+</select></td>
+</tr>
+                                           <!--zipcode-->
+<tr>
+<td><label for="zipcode">Zip Code</label></td>
+<td class="icon"><i class="fa fa-home"></i> <input type="phone" id="zipcode" placeholder="Zip Code" size="30" pattern="[0-9]{6,8}" title="Enter valid code between 6-8 digits" autocomplete=off></td>
+</tr>
+                                                     <!--domain-name-->
+<tr>
+<td><label for="website">Website or domain name</label</td>
+<td class="icon"><i class="fa fa-globe"></i> <input type="url" id="website" placeholder="Website or domain name" size="30" autocomplete=off></td>
+</tr>
+                                             <!--Hosting-->
+<tr>
+<td><label for="rad">Do you have hosting?</label></td>
+<td><input type="radio" id="rad"> Yes</td>
+</tr>
+<tr>
+<td></td>
+<td><input type="radio" id="rad"> No</td>
+</tr>
+                                              <!--project discription-->
+<tr>
+<td><label for="description">Project Description</label></td>
+<td class="icon"><i class="fa fa-pencil"></i> <textarea rows="3" cols="32" id="description" placeholder="Project Description" autocomplete=off></textarea></td>
+</tr>
+<tr>
+
+</tr>
+<tr>
+<td></td>
+<td><button>Send</button><td>             <!--submit button-->
+</tr>
+</table>
+</form>
+</div>
+
+</body>
+</html>

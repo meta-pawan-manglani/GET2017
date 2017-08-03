@@ -1,0 +1,28 @@
+h1{
+	padding:30px;
+}
+button{
+	background-color:#f0aa49;
+	color:white;
+	height:40px;
+	width:100px;
+	border:1px solid;
+	border-radius:5px;
+	cursor:pointer;
+}
+body{
+	background-color:#ececec;
+}
+.icon{
+    background-color: white;
+    color: #aaa;
+    padding:10px;
+    border-radius:5px;
+}
+input{
+    border: 1px white;
+    background-color: white;
+    padding:10px;
+    border-radius:5px;
+}
+

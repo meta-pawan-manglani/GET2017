@@ -1,0 +1,26 @@
+<html>
+<!--
+Author Pawan Manglani.
+Date 03-AUG-2017
+Assignment 3 HTML-CSS-SESSION-4
+-->
+<head>
+	<title>
+	Square
+	</title>
+</head>
+<body>
+	<canvas id="myCanvas" height="500" width="500" style="border:2px solid ;">
+	Browser does not support canvas.	
+	</canvas>
+	<script>
+	var canvas = document.getElementById("myCanvas");
+	var ctx=canvas.getContext("2d");
+	ctx.beginPath();
+	ctx.fillStyle = "green";
+	ctx.fillRect(100,100,200,200);
+	ctx.closePath();
+	ctx.stroke();
+	</script>
+</body>
+</html>
