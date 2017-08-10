@@ -1,0 +1,29 @@
+<html>
+ <!--
+Author Pawan Manglani.
+Date 03-AUG-2017
+Assignment 3 HTML-CSS-SESSION-5
+-->
+<head>
+<title>
+index
+</title>
+	<script>
+	function getStore(){
+	var msg=document.getElementById("msg");	
+	msg.innerHTML = localStorage.getItem("key1");
+	}
+	function saveToStore(){
+		var textbox=document.getElementById("textbox");
+		localStorage.setItem("key1",textbox.value);
+		textbox.value="";
+	}
+	</script>
+</head>
+<body>
+<p id="msg">hello world</p>
+<input type="text" placeholder="enter some value" id="textbox"/><br/><br/>
+<input type="button" value="Save" onclick="saveToStore()" /><br/><br/>
+<input type="button" value="Get Local Storage" onclick="getStore()" />
+</body>
+</html>
