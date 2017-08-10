@@ -1,0 +1,105 @@
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+*{
+	margin : 0;
+	padding : 0;
+	font-family : Arial;
+}
+
+.left{
+	float : left;
+}
+
+.right{
+	float : right;
+}
+
+.clear{
+	clear : both;
+}
+
+a,a:link,a:active,a:visited{
+	text-decoration: none;
+	color : black;
+}
+
+li{
+	list-style: none;
+}
+
+
+
+
+/************* Header *************/
+
+#header{
+	background : black;
+	color : white;
+	padding : 0px 40px;
+	height:70px;
+	font-size:30px;	
+}
+
+
+#header .right nav ul li a{
+	color : teal;
+	padding : 15px 10px;
+	display: inline-block;
+	transition: 0.4s;
+}
+
+#header .right nav ul li{
+	display: inline-block;
+}
+
+#header .right nav ul li:hover a{
+	color : white;
+}
+
+/************* Header End *************/
+
+
+
+#cover{
+	background : teal;
+	padding : 80px 0;
+	color : white;
+	text-align: center;
+	height:800px;
+}
+
+#cover input{
+	display: inline-block;
+	text-align: center;
+    padding: 25px 70px;
+	margin : auto;
+	text-transform: uppercase;
+	font-size: 15px;
+	margin-top: 15px;
+}
+
+#cover p{
+	width : 50%;
+	margin : auto;
+	text-align: center;
+	margin-top : 50px;
+	font-size : 50px;
+}
+
+#cover h4{
+	text-align: center;
+	padding : 20px 100px;
+	margin : auto;
+	text-transform: uppercase;
+}
