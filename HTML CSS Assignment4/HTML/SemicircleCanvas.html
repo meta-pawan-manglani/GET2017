@@ -1,0 +1,30 @@
+<html>
+<!--
+Author Pawan Manglani.
+Date 03-AUG-2017
+Assignment 3 HTML-CSS-SESSION-4
+-->
+<head>
+	<title>
+	 SemiCircle
+	</title>
+</head>
+<body>
+	<canvas id="myCanvas" height="500" width="500" style="border:2px solid ;">
+	Browser does not support canvas.	
+	</canvas>
+	<script>
+	var canvas = document.getElementById("myCanvas");
+	var ctx=canvas.getContext("2d");
+	ctx.beginPath();
+	ctx.arc(250,250,100,0.5*Math.PI,1.5*Math.PI);
+	ctx.fillStyle = "blue";
+	ctx.fill();
+	ctx.closePath();
+	ctx.beginPath();
+	ctx.arc(250,250,100,1.5*Math.PI,0.5*Math.PI);	
+	ctx.closePath();
+	ctx.stroke();
+	</script>
+</body>
+</html>

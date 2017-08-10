@@ -1,0 +1,31 @@
+<html>
+<!--
+Author Pawan Manglani.
+Date 03-AUG-2017
+Assignment 3 HTML-CSS-SESSION-4
+-->
+<head>
+	<title>
+	CircleStyle
+	</title>
+</head>
+<body>
+	<canvas id="myCanvas" height="500" width="500" style="border:2px solid ;">
+	Browser does not support canvas.	
+	</canvas>
+	<script>
+	var canvas = document.getElementById("myCanvas");
+	var ctx=canvas.getContext("2d");
+	ctx.beginPath();
+	ctx.arc(250,250,100,0,2*Math.PI);
+	ctx.fillStyle = "yellow";
+	ctx.fill();
+	
+	ctx.fillStyle = "white";
+	ctx.fillRect(230,180,40,150);
+	ctx.fillRect(170,230,160,40);
+	ctx.closePath();
+	ctx.stroke();
+	</script>
+</body>
+</html>
