@@ -31,9 +31,10 @@ if(str.length==0){
 		}
 		if(curLength>1){
 			str = str.slice(0,prevPos) + str.slice(curPos,str.length);
+			result+="->"+str;
 		}
 		if(str.length==0){
-			result+="-> EMPTY";
+			result+="EMPTY";
 		}
 }
 document.getElementById("result").innerHTML=result;
