@@ -130,6 +130,7 @@ DoublyLinkedList.prototype.remove = function() {
         this.head = currentNode.next;
         deletedNode = currentNode;
         currentNode = null;
+	    this.head.prev = null;
 		if(this.head==null){
          document.getElementById("search").disabled=true;
 	    document.getElementById("remove").disabled=true;
