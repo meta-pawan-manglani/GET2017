@@ -26,7 +26,7 @@ import com.metacube.enums.Status;
 /**
  * The Class EmployeeController.
  * 
- * Control the product related operations
+ * Control the employee related operations
  * 
  * @author Pawan Manglani
  * @version 1.1 14-Aug-2017
@@ -40,15 +40,12 @@ public class EmployeeController {
 
 	Employee emp;
 
-	/**
-	 * Search product.
-	 *
-	 *This method search the product if it is present or not
-	 *
-	 * @param id the id
-	 * @return the status
+	
+         /**
+	 * Get employee.
+	 * 
+	 * This method print all the employee on view
 	 */
-
 
 	@GET
 	@Path("/getEmployee")
@@ -62,9 +59,12 @@ public class EmployeeController {
 		return s;
 	}
 	/**
-	 * Prints the product.
-	 * 
-	 * This method print all the product to console
+	 * Search employee.
+	 *
+	 *This method search the employee if it is present or not
+	 *
+	 * @param id the id
+	 * @return the status
 	 */
 	@GET
 	@Path("/searchEmployee/{id}")
@@ -81,38 +81,54 @@ public class EmployeeController {
 		
 		return answer;
 	}
-
+	/**
+	 * Add employee.
+	 *
+	 *This method Add the employee in database
+	 *
+	 * @param id the id name the name of employee age the age of employee
+	 * @return the status
+	 */
 	@POST
 	@Path("/addEmp/{id},{name},{age}")
-	@Produces({ MediaType.TEXT_PLAIN })
-	public String addEmploy(@PathParam("id") String empNo,@PathParam("name") String name,@PathParam("age") String a) {
-		String answer=Status.Error_Occured.toString();
-		boolean flag = true;
-		double age = 0;
-		if(empNo.equalsIgnoreCase("null")){
-			flag = false;
-		}else if(name.equalsIgnoreCase(null)){
-			flag = false;
-		}else{
-			try{
-				age = Double.parseDouble(a);
-			}catch(Exception e){
-				flag = false;
-			}
-		}
-		if(flag){
-		emp = new Employee();
-		emp.setName(name);
-		emp.setId(empNo);
-		emp.setAge(age);
-		answer = ef.addEmployee(emp).toString();
-	   }
-		else{
-			answer = Status.Wrong_Input.toString();
-		}
-		return answer;
-	}
-
+	@Produces({ MediaType.TEXT_PLAIN }) 
+        public String addEmploy(@PathParam("id") String empNo, @PathParam("name") String name, @PathParam("age") String a) {
+          String answer = Status.Error_Occured.toString();
+          boolean flag = true;
+          double age = 0;
+          try {
+             empNo = empNo.trim();
+             a = a.trim();
+             name = name.trim();
+             if (empNo.equalsIgnoreCase("null") || empNo.length() == 0) {
+                flag = false;
+             } else if (name.equalsIgnoreCase(null) || name.length() == 0) {
+                flag = false;
+             } else {
+                age = Double.parseDouble(a);
+             }
+             if (flag) {
+                emp = new Employee();
+                emp.setName(name);
+                emp.setId(empNo);
+                emp.setAge(age);
+                answer = ef.addEmployee(emp).toString();
+             } else {
+                answer = Status.Wrong_Input.toString();
+             }
+         } catch (Exception e) {
+            answer = Status.Wrong_Input.toString();
+         }
+         return answer;
+     }
+         /**
+	 * Delete employee.
+	 *
+	 *This method delete the employee from database
+	 *
+	 * @param id the id 
+	 * @return the status
+	 */
 	@DELETE
 	@Path("/delEmp/{id}")
 	@Produces({  MediaType.TEXT_PLAIN })
