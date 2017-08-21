@@ -6,7 +6,6 @@
 package com.metacube.DAO;
 import java.util.List;
 
-import org.json.simple.JSONArray;
 
 import com.metacube.entity.BaseEntity;
 import com.metacube.entity.Employee;
