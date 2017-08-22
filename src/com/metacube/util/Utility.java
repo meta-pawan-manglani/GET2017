@@ -90,7 +90,6 @@ public class Utility {
         Object[] currentList = list.toArray();
         int len = currentList.length;
         for(int index = len - 1,newIndex = 0; index>=0; index--,newIndex++){
-        	System.out.println(currentList[index]);
             list.set(newIndex, (T)currentList[index]);
         }
     }

@@ -7,22 +7,22 @@ package com.metacube.customDoubleLinkedList;
  * The Class Node.
  *@author Pawan Manglani
  *@version 1.1 21-Aug-2017
- * @param <E> the element type
+ * @param <T> the element type
  */
-public class Node<E> {
+public class Node<T> {
 	
 	/** The data. */
-	E data;
+	T data;
 	
 	/** The previous. */
-	Node<E> next,previous;
+	Node<T> next,previous;
 
 	/**
 	 * Next.
 	 *
 	 * @return the node
 	 */
-	public Node<E> next() {
+	public Node<T> next() {
 		return this.next;
 	}
 
@@ -31,7 +31,7 @@ public class Node<E> {
 	 *
 	 * @return the node
 	 */
-	public Node<E> previous() {
+	public Node<T> previous() {
 		return this.previous;
 	}
 	
@@ -41,8 +41,8 @@ public class Node<E> {
 	 * @param data the data
 	 * @return the node
 	 */
-	public Node<E> getNode(E data) {
-		Node<E> node = new Node<E>();
+	public Node<T> getNode(T data) {
+		Node<T> node = new Node<>();
 		node.data = data;
 		node.next = null;
 		node.previous = null;

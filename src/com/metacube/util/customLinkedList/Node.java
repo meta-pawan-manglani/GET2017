@@ -5,7 +5,8 @@ package com.metacube.util.customLinkedList;
 
 /**
  * The Class Node.
- *
+ *@author Pawan Manglani
+ *@version 1.1 22-Aug-2017
  * @param <T> the generic type
  */
 public class Node<T extends Object> {
