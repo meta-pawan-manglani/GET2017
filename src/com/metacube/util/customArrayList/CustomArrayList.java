@@ -162,7 +162,11 @@ public class CustomArrayList<T extends Object> implements CustomList<T> {
    
 	@Override
     public T get(int index) {
+		try{
         rangeCheck(index);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
         return (T) elementData[index];
     }
 
@@ -174,19 +178,9 @@ public class CustomArrayList<T extends Object> implements CustomList<T> {
      * @throws IndexOutOfBoundsException
      */
     private void rangeCheck(int index) {
-        if (index>=size || index<0) {
-            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+        if (index>size || index<0) {
+            throw new IndexOutOfBoundsException("Invalid Position");
         }
-    }
-
-    /**
-     * Constructs an IndexOutOfBoundsException detail message
-     *
-     * @param index
-     * @return The message
-     */
-    private String outOfBoundsMsg(int index) {
-        return "Index: " + index + ", Size: " + size;
     }
 
     /**
@@ -199,14 +193,19 @@ public class CustomArrayList<T extends Object> implements CustomList<T> {
      */
     @Override
     public T remove(int index) {
+    	T oldValue = null;
+    	try{
         rangeCheck(index);
         modCount++;
-        T oldValue = (T) elementData[index];
+         oldValue = (T) elementData[index];
         int numMoved = size - index - 1;
         if (numMoved > 0) {
             System.arraycopy(elementData, index + 1, elementData, index, numMoved);
         }
         elementData[--size] = null; // Let gc do its work
+    	}catch(IndexOutOfBoundsException e){
+    		System.out.println(e.getMessage());
+    	}
         return oldValue;
     }
 
