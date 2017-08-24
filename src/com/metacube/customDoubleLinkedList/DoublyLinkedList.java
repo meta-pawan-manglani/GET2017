@@ -409,4 +409,10 @@ public class DoublyLinkedList<T> implements CustomList<T> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+	@Override
+	public int indexOf(Object o, int pos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

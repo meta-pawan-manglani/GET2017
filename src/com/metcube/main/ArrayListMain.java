@@ -58,10 +58,10 @@ public class ArrayListMain {
                     System.out.println("Enter element you want to get");
                     element = Input.takeElementAsInput();
                     position = cl.indexOf(element);
-                    if (position == -1) {
-                        System.out.println("Element is not present in the ArrayList");
+                    if (position != -1) {
+                    	System.out.println("Element is at position : " + position);   
                     } else {
-                        System.out.println("Element is at position : " + position);
+                    	System.out.println("Element is not present in the ArrayList");
                     }
                     break;
                     
@@ -120,8 +120,21 @@ public class ArrayListMain {
                     cl.addAll(joinList);
                     break;
                     
-                    /*Exit */	    
+                 	/*Get the element from list*/    
                 case 11:
+                    System.out.println("Enter element you want to get");
+                    element = Input.takeElementAsInput();
+                    System.out.println("Enter position aftre which search should be applied");
+                     int pos = Input.takeIntegerAsInput();
+                    position = cl.indexOf(element,pos);
+                    if (position != -1) {
+                    	System.out.println("Element is at position : " + position);   
+                    } else {
+                    	System.out.println("Element is not present in the ArrayList");
+                    }
+                    break;
+                    /*Exit */	    
+                case 12:
                     System.exit(0);
                     break;
                 default:
@@ -148,7 +161,8 @@ public class ArrayListMain {
         System.out.println("8. Sort ArrayList");
         System.out.println("9. Print ArrayList");
         System.out.println("10. Join two ArrayList");
-        System.out.println("11. Exit\n");
+        System.out.println("11 To search an element after position");
+        System.out.println("12. Exit\n");
         System.out.println("Enter your choice");
     }
 }

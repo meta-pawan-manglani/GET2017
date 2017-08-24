@@ -33,6 +33,8 @@ public interface CustomList<T> extends Iterable{
 
     public int indexOf(Object o);
     
+    public int indexOf(Object o,int pos);
+    
     public Object[]  toArray();
     
     @SuppressWarnings("hiding")

@@ -40,9 +40,15 @@ public class CustomArrayList<T extends Object> implements CustomList<T> {
      * negative
      */
     public CustomArrayList(int initialCapacity) {
+    	try{
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
         }
+    	}catch(Exception e){
+    		System.out.println(e.getMessage());
+    		System.out.println("Halting the code");
+    		System.exit(1);
+    	}
         this.elementData = new Object[initialCapacity];
     }
 
@@ -132,6 +138,41 @@ public class CustomArrayList<T extends Object> implements CustomList<T> {
      * @return the index of element
      */
     @Override
+    public int indexOf(Object o,int pos) {
+        int index = -1;
+        try{
+        	rangeCheck(pos);
+        if (o == null) {
+            for (int i = pos+1; i < size; i++) {
+                if (elementData[i] == null) {
+                    index = i;
+                    break;
+                }
+            }
+        } else {
+            for (int i = pos+1; i < size; i++) {
+                if (o.equals(elementData[i])) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        }catch(Exception e){
+        	System.out.println(e.getMessage());
+        }
+        return index;
+    }
+    
+    /**
+     * Returns the index of the first occurrence of the specified element in
+     * this list, or -1 if this list does not contain the element. More
+     * formally, returns the lowest index i such that (o==null ? get(i)==null :
+     * o.equals(get(i))), or -1 if there is no such index.
+     *
+     * @param o element whose index in this list is to be needed
+     * @return the index of element
+     */
+    @Override
     public int indexOf(Object o) {
         int index = -1;
         if (o == null) {
@@ -162,7 +203,11 @@ public class CustomArrayList<T extends Object> implements CustomList<T> {
    
 	@Override
     public T get(int index) {
+		try{
         rangeCheck(index);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
         return (T) elementData[index];
     }
 
@@ -174,19 +219,9 @@ public class CustomArrayList<T extends Object> implements CustomList<T> {
      * @throws IndexOutOfBoundsException
      */
     private void rangeCheck(int index) {
-        if (index>=size || index<0) {
-            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+        if (index>size || index<0) {
+            throw new IndexOutOfBoundsException("Invalid Position");
         }
-    }
-
-    /**
-     * Constructs an IndexOutOfBoundsException detail message
-     *
-     * @param index
-     * @return The message
-     */
-    private String outOfBoundsMsg(int index) {
-        return "Index: " + index + ", Size: " + size;
     }
 
     /**
@@ -199,14 +234,19 @@ public class CustomArrayList<T extends Object> implements CustomList<T> {
      */
     @Override
     public T remove(int index) {
+    	T oldValue = null;
+    	try{
         rangeCheck(index);
         modCount++;
-        T oldValue = (T) elementData[index];
+         oldValue = (T) elementData[index];
         int numMoved = size - index - 1;
         if (numMoved > 0) {
             System.arraycopy(elementData, index + 1, elementData, index, numMoved);
         }
         elementData[--size] = null; // Let gc do its work
+    	}catch(IndexOutOfBoundsException e){
+    		System.out.println(e.getMessage());
+    	}
         return oldValue;
     }
 
