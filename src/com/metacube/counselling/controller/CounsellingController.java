@@ -16,16 +16,16 @@ import com.metacube.queue.CustomQueue;
 public class CounsellingController {
 
 	/** The students. */
-	CustomQueue<Student> students;
+	private CustomQueue<Student> students;
 
 	/** The colleges. */
-	CustomQueue<Colleges> colleges;
+	private CustomQueue<Colleges> colleges;
 
 	/** The result. */
-	CustomQueue<String> result;
+	private CustomQueue<String> result;
 
 	/** The council. */
-	CounsellingFacade council = CounsellingFacade.getInstance();
+	private CounsellingFacade council = CounsellingFacade.getInstance();
 
 	/**
 	 * Instantiates a new counselling controller.
