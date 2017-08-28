@@ -1,8 +1,8 @@
 package com.metacube.roomAllotment.facade;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -16,151 +16,148 @@ import com.metacube.roomAllotment.entity.Guest;
  */
 public class AllotmentFacade {
 
-    /**
-     * The af.
-     */
-    private static volatile AllotmentFacade af;
+	/**
+	 * The af.
+	 */
+	private static volatile AllotmentFacade af;
 
-    /**
-     * The num.
-     */
-    private static int num = 1;
+	/**
+	 * The num.
+	 */
+	private static int num = 1;
 
-    /**
-     * Gets the single instance of AllotmentFacade.
-     *
-     * @return single instance of AllotmentFacade
-     */
-    public static AllotmentFacade getInstance() {
-        AllotmentFacade af = AllotmentFacade.af;
-        if (af == null) {
-            synchronized (AllotmentFacade.class) {
-                if (af == null) {
-                    AllotmentFacade.af = af = new AllotmentFacade();
-                }
-            }
+	/**
+	 * Gets the single instance of AllotmentFacade.
+	 *
+	 * @return single instance of AllotmentFacade
+	 */
+	public static AllotmentFacade getInstance() {
+		AllotmentFacade af = AllotmentFacade.af;
+		if (af == null) {
+			synchronized (AllotmentFacade.class) {
+				if (af == null) {
+					AllotmentFacade.af = af = new AllotmentFacade();
+				}
+			}
 
-        }
+		}
 
-        return af;
-    }
+		return af;
+	}
 
-    /**
-     * The info map.
-     */
-    private Map<Guest, Integer> infoMap;
+	/**
+	 * The info List.
+	 */
+	private List<Guest> infoList;
 
-    /**
-     * The rooms.
-     */
-    private TreeMap<Integer, Boolean> rooms;
+	/**
+	 * The rooms.
+	 */
+	private TreeMap<Integer, Boolean> rooms;
 
-    /**
-     * The Constant totalRooms.
-     */
-    private final static int totalRooms = 11;
+	/**
+	 * The Constant totalRooms.
+	 */
+	private final static int totalRooms = 11;
 
-    /**
-     * Instantiates a new allotment facade.
-     */
-    public AllotmentFacade() {
-        rooms = new TreeMap<Integer, Boolean>();
-        infoMap = new HashMap<>();
-        for (int index = 1; index <= totalRooms; index++) {
-            rooms.put(index, true);
-        }
-    }
+	/**
+	 * Instantiates a new allotment facade.
+	 */
+	public AllotmentFacade() {
+		rooms = new TreeMap<Integer, Boolean>();
+		infoList = new ArrayList<>();
+		for (int index = 0; index <= totalRooms; index++) {
+			rooms.put(index, true);
+		}
+	}
 
-    /**
-     * Allot rooms.
-     *
-     * @param guest the guest
-     * @return the room Number
-     */
-    public int allotRooms(Guest guest) {
-        int hash = guest.hashCode();
-        hash = hash * num;
-        num++;
-        /**
-         * Getting the room number
-         */
-        int roomNumber = hash % totalRooms;
+	/**
+	 * Allot rooms.
+	 *
+	 * @param guest the guest
+	 * @return the room Number
+	 */
+	public int allotRooms(Guest guest) {
+		int hash = guest.hashCode();
+		hash = hash * num;
+		num++;
+		/**
+		 * Getting the room number
+		 */
+		int roomNumber = Math.abs(hash % totalRooms);
+		/**
+		 * If room is already full get another room which is free
+		 */
+		if (!rooms.get(roomNumber)) {
+			Set<Integer> set = rooms.keySet();
+			Iterator<Integer> itr = set.iterator();
+			/**
+			 * Check which room is free
+			 */
+			while (itr.hasNext()) {
+				roomNumber = itr.next();
+				if (rooms.get(roomNumber)) {
+					break;
+				}
+			}
+		}
+		/**
+		 * Allot that room to guest
+		 */
+		guest.setRoom(roomNumber);
+		infoList.add(guest);
+		rooms.put(roomNumber, false);
+		return roomNumber;
+	}
 
-        /**
-         * If room is already full get another room which is free
-         */
-        if (!rooms.get(roomNumber)) {
-            Set<Integer> set = rooms.keySet();
-            Iterator<Integer> itr = set.iterator();
-            /**
-             * Check which room is free
-             */
-            while (itr.hasNext()) {
-                roomNumber = itr.next();
-                if (rooms.get(roomNumber)) {
-                    break;
-                }
-            }
-        }
-        /**
-         * Allot that room to guest
-         */
-        guest.setRoom(roomNumber);
-        infoMap.put(guest, roomNumber);
-        rooms.put(roomNumber, false);
-        return roomNumber;
-    }
+	/**
+	 * The free room
+	 *
+	 * @return the number of free rooms
+	 */
+	public int freeRooms() {
+		int result = 0;
+		Set<Integer> keys = rooms.keySet();
+		Iterator<Integer> itr = keys.iterator();
+		while (itr.hasNext()) {
+			if (rooms.get(itr.next())) {
+				result++;
+			}
+		}
+		return result;
+	}
 
-    /**
-     * The free room
-     *
-     * @return the number of free rooms
-     */
-    public int freeRooms() {
-        int result = 0;
-        Set<Integer> keys = rooms.keySet();
-        Iterator<Integer> itr = keys.iterator();
-        while (itr.hasNext()) {
-            if (rooms.get(itr.next())) {
-                result++;
-            }
-        }
-        return result;
-    }
+	/**
+	 * Get all guest
+	 *
+	 * @return The string containing information of all guest
+	 */
+	public String getAllGuest() {
+		Iterator<Guest> itr = infoList.iterator();
+		String allotment = "";
+		while (itr.hasNext()) {
+			allotment += itr.next().toString() + "\n";
+		}
+		return allotment;
+	}
 
-    /**
-     * Get all guest
-     *
-     * @return The string containing information of all guest
-     */
-    public String getAllGuest() {
-        Set<Guest> keys = infoMap.keySet();
-        Iterator<Guest> itr = keys.iterator();
-        String allotment = "";
-        while (itr.hasNext()) {
-            allotment += itr.next().toString() + "\n";
-        }
-        return allotment;
-    }
-
-    /**
-     * Get guest search for the guest
-     *
-     * @param guest
-     * @return guest
-     */
-    public Guest getGuest(Guest guest) {
-        Guest result = null;
-        Guest temp;
-        Set<Guest> keys = infoMap.keySet();
-        Iterator<Guest> itr = keys.iterator();
-        while (itr.hasNext()) {
-            temp = itr.next();
-            if (temp.equals(guest)) {
-                result = temp;
-                break;
-            }
-        }
-        return result;
-    }
+	/**
+	 * Get guest search for the guest
+	 *
+	 * @param guest
+	 * @return guest
+	 */
+	public Guest getGuest(Guest guest) {
+		Guest result = null;
+		Guest temp;
+		Iterator<Guest> itr = infoList.iterator();
+		while (itr.hasNext()) {
+			temp = itr.next();
+			if (temp.equals(guest)) {
+				result = temp;
+				break;
+			}
+		}
+		return result;
+	}
 }
