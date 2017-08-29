@@ -91,8 +91,9 @@ public class FileDao {
 						String name = itemDetail[0].trim();
 						int rank = Integer.parseInt(itemDetail[1].trim());
 						int length = colleges.size();
-						int choice[] = new int[length];
 						String choiceArr[] = itemDetail[2].split(",");
+						length = choiceArr.length;
+						int choice[] = new int[choiceArr.length];
 						for(int i=0 ; i<length ; i++){
 							choice[i] = Integer.parseInt(choiceArr[i].trim());
 						}
@@ -105,7 +106,8 @@ public class FileDao {
 				}
 			}
 
-		} catch (IOException | IllegalArgumentException e) {
+		} catch (Exception e) {
+			System.out.println("Error in Student File");
 			System.out.println(e.getMessage());
 			System.out.println("Halting the code");
 			System.exit(1);
