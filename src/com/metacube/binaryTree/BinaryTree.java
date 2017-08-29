@@ -1,5 +1,7 @@
 package com.metacube.binaryTree;
 
+import com.metacube.queue.CustomQueue;
+
 
 /**
  * The Class BinaryTree.
@@ -16,6 +18,10 @@ public class BinaryTree<T> {
 	/** The post order. */
 	private String inOrder,preOrder,postOrder;
 
+	/** Queue which store the parent Nodes */ 
+	private CustomQueue<BTNode<T>> parentNodes;
+
+
 	/**
 	 * Instantiates a new binary tree.
 	 */
@@ -24,6 +30,7 @@ public class BinaryTree<T> {
 		preOrder="";
 		postOrder="";
 		root = null;
+		this.parentNodes = new CustomQueue<>();
 	}
 
 	/**
@@ -33,41 +40,24 @@ public class BinaryTree<T> {
 	 * @param data the data
 	 * @return node
 	 */
-	public BTNode<T> insert(BTNode<T> root , T data){
-		if(root == null){
-			root = new BTNode<T>(data);
-		}
-		else{
-			if( root.left() == null ){
-				root.left = insert(root.left() , data);
+	public boolean insert(T data) {
+		BTNode<T> newNode = new BTNode<>(data);
+		if (this.root == null) {
+			this.root = newNode;
+			parentNodes.enqueue(this.root);
+		} else {
+			BTNode<T> currentNode = parentNodes.getFront();
+			if (currentNode.getLeft() == null) {
+				currentNode.setLeft(newNode);
+				parentNodes.enqueue(currentNode.getLeft());
+			} else {
+				currentNode.setRight(newNode);
+				parentNodes.enqueue(currentNode.getRight());
+				parentNodes.dequeue();
 			}
-			else{
-				root.right = insert(root.right() , data);
-			}
 		}
-		return root;
-	}
 
-	/**
-	 * create mirror tree towards left.
-	 *
-	 * @param root the root
-	 * @param data the data
-	 * @return node
-	 */
-	public BTNode<T> insertMirrorNode(BTNode<T> root , T data){
-		if(root == null){
-			root = new BTNode<T>(data);
-		}
-		else{
-			if( root.right == null ){
-				root.right = insertMirrorNode(root.right() , data);
-			}
-			else{
-				root.left = insertMirrorNode(root.left() , data);
-			}
-		}
-		return root;
+		return true;
 	}
 
 	/**
@@ -75,13 +65,13 @@ public class BinaryTree<T> {
 	 *
 	 * @param root the root
 	 */
-	public void printPreOrder(BTNode<T> root){
+	private void printPreOrder(BTNode<T> root){
 		if(root==null){
 			return ;
 		}
 		preOrder += root.getData() + " ";
-		printPreOrder(root.left());
-		printPreOrder(root.right());
+		printPreOrder(root.getLeft());
+		printPreOrder(root.getRight());
 	}
 
 	/**
@@ -89,13 +79,13 @@ public class BinaryTree<T> {
 	 *
 	 * @param root the root
 	 */
-	public void printPostOrder(BTNode<T> root){
+	private void printPostOrder(BTNode<T> root){
 
 		if(root==null){
 			return ;
 		}
-		printPostOrder(root.left());
-		printPostOrder(root.right());
+		printPostOrder(root.getLeft());
+		printPostOrder(root.getRight());
 		postOrder += root.getData()+" ";
 
 	}
@@ -105,61 +95,30 @@ public class BinaryTree<T> {
 	 *
 	 * @param root the root
 	 */
-	public void printInOrder(BTNode<T> root){
-
+	private void printInOrder(BTNode<T> root){
 		if(root==null){
 			return ;
 		}
-		printInOrder(root.left());
+		printInOrder(root.getLeft());
 		inOrder+=root.getData() + " ";
-		printInOrder(root.right());
+		printInOrder(root.getRight());
 	}
-
-	/**
-	 * call preOrder.
-	 */
-	public void preOrder(){
-		printPreOrder(root);
-	}
-
-	/**
-	 * call postOrder.
-	 */
-	public void postOrder(){
-		printPostOrder(root);
-	}
-
-	/**
-	 * call Inorder.
-	 */
-	public void inOrder(){
-		printInOrder(root);
-	}
-
 	/**
 	 * call insert Node.
 	 *
 	 * @param data the data
 	 */
 	public void insertNode(T data){
-		root = insert(root,data);
-	}
-
-	/**
-	 * call insert node of mirror.
-	 *
-	 * @param data the data
-	 */
-	public void insertMirrortNode(T data){
-		root = insertMirrorNode(root,data);
+		 insert(data);
 	}
 
 	/**
 	 * Gets the in order.
 	 *
-	 * @return inorder result
+	 * @return in order result
 	 */
 	public String getInOrder(){
+		printInOrder(root);
 		return inOrder;
 	}
 
@@ -169,33 +128,48 @@ public class BinaryTree<T> {
 	 * @return preOrder Result
 	 */
 	public String getPreOrder(){
+		printPreOrder(root);
 		return preOrder;
 	}
 
 	/**
 	 * Gets the post order.
 	 *
-	 * @return postorder result
+	 * @return post order result
 	 */
 	public String getPostOrder(){
+		printPostOrder(root);
 		return postOrder;
 	}
 
 	/**
 	 * Mirror.
 	 *
-	 * @param newRoot the new root
-	 * @param oldRoot the old root
+	 * @param root another tree
 	 * @return true, if successful
 	 */
-	public boolean mirror(BTNode<T> newRoot,BTNode<T> oldRoot){
-		if(newRoot == null && oldRoot==null)
-			return true;
-
-		if(newRoot == null || oldRoot==null)
-			return false;
-
-		return oldRoot.getData().toString().equals(newRoot.getData().toString()) && mirror(newRoot.left(),oldRoot.right()) && mirror(newRoot.right(),oldRoot.left());
+	public boolean mirror(BinaryTree<T> root){
+		/* In order of argument tree */ 
+		String inOrder1 = root.getInOrder();
+		/*In order of caller tree*/
+		String inOrder2 = this.getInOrder();
+		boolean result = true;
+		/*If length is not equal then return false*/
+		if(inOrder1.length() != inOrder2.length()) {
+			result = false;
+		}
+		/*inOrder of tree 1 should be reverse of inOrder of tree 2*/ 
+		if(result) {
+			int len = inOrder1.length();
+			for(int index1 = 0,index2 = len-1 ; index1<len ; index1++,index2--) {
+				if(inOrder1.charAt(index1) != inOrder.charAt(index2)) {
+					result = false;
+					break;
+				}
+			}
+		}
+		/*return result*/
+		return result;
 	}
 
 	/**

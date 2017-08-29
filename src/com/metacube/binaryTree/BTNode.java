@@ -26,10 +26,10 @@ public class BTNode<T> {
 	}
 
 	/** The left. */
-	public BTNode<T> left;
+	private BTNode<T> left;
 	
 	/** The right. */
-	public BTNode<T> right;
+	private BTNode<T> right;
 	
 	/**
 	 * Instantiates a new BT node.
@@ -47,7 +47,7 @@ public class BTNode<T> {
 	 *
 	 * @return the BT node
 	 */
-	public BTNode<T> left(){
+	public BTNode<T> getLeft(){
 		return this.left;
 	}
 	
@@ -56,8 +56,25 @@ public class BTNode<T> {
 	 *
 	 * @return the BT node
 	 */
-	public BTNode<T> right(){
+	public BTNode<T> getRight(){
 		return this.right;
 	}
 	
+	/**
+	 * Left.
+	 *
+	 * set left of the  node
+	 */
+	public void setLeft(BTNode<T> left){
+		 this.left = left;
+	}
+	
+	/**
+	 * Right.
+	 *
+	 * set right of the  node
+	 */
+	public void setRight(BTNode<T> right){
+	   this.right = right;
+	}
 }

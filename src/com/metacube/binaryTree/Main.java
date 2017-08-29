@@ -24,10 +24,13 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 
 		do{
+			/*Print menu*/
 			printMenu();
+			/*Take user choice*/
 			int choice = takeIntegerAsInput();
 
 			switch(choice){
+			/*In case of adding the data*/
 			case 1:
 				System.out.println("Tnter number of elements you want to add to the binary tree");
 				int num = takeIntegerAsInput();
@@ -36,35 +39,41 @@ public class Main {
 					tree.insertNode(takeElementAsInput());
 				}
 				break;
+				/*Inorder printing*/
 			case 2:
-				tree.inOrder();
+				tree.getInOrder();
 				System.out.println(tree.getInOrder());
 				break;
+				/*pre order printing*/
 			case 3:
-				tree.preOrder();
+				tree.getPreOrder();
 				System.out.println(tree.getPreOrder());
 				break;
+				/*post order printing*/
 			case 4:
-				tree.postOrder();
+				tree.getPostOrder();
 				System.out.println(tree.getPostOrder());
 				break;
+				/*In case of creatig mirror*/
 			case 5:
-				System.out.println("Tnter number of elements you want to add to the binary tree");
+				System.out.println("Enter number of elements you want to add to the binary tree");
 				num = takeIntegerAsInput();
 				for(int index = 0 ; index < num ; index++){
-					System.out.println("Tnter the element");
+					System.out.println("Enter the element");
 					T data = (T)scan.next();
-					mirrorTree.insertMirrortNode(data);
+					mirrorTree.insert(data);
 				}
 				break;
+				/*Check if images are mirror images*/
 			case 6:
-				if(tree.mirror(mirrorTree.getRoot(),tree.getRoot())){
+				if(tree.mirror(mirrorTree)){
 					System.out.println("Trees are mirror images");
 				}
 				else{
 					System.out.println("Trees are not mirror images");
 				}
 				break;
+				/*In case of exit*/
 			case 7: 
 				scan.close();
 				System.exit(0);

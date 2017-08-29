@@ -32,15 +32,12 @@ public class TestBTree {
 		tree.insertNode(30);
 		tree.insertNode(40);
 		tree.insertNode(50);
-		tree.inOrder();
-		tree.preOrder();
-		tree.postOrder();
 		mirrorTree = new BinaryTree();
-		mirrorTree.insertMirrortNode(10);
-		mirrorTree.insertMirrortNode(20);
-		mirrorTree.insertMirrortNode(30);
-		mirrorTree.insertMirrortNode(40);
-		mirrorTree.insertMirrortNode(50);
+		mirrorTree.insert(50);
+		mirrorTree.insert(20);
+		mirrorTree.insert(30);
+		mirrorTree.insert(10);
+		mirrorTree.insert(40);
 	}
 	
 	/**
@@ -48,8 +45,8 @@ public class TestBTree {
 	 */
 	@Test
 	public void testMirror() {
-		boolean expected = tree.mirror(tree.getRoot(), mirrorTree.getRoot());
-		boolean actual = true;
+		boolean expected = tree.mirror(mirrorTree);
+		boolean actual = false;
 		assertEquals(expected,actual);
 	}
 	
@@ -69,7 +66,7 @@ public class TestBTree {
 	@Test
 	public void testInOrder(){
 		String expected = tree.getInOrder();
-		String actual = "20 10 40 30 50 ";
+		String actual = "40 20 50 10 30 ";
 		assertEquals(expected,actual);
 	}
 	
@@ -79,7 +76,7 @@ public class TestBTree {
 	@Test
 	public void testPreOrder(){
 		String expected = tree.getPreOrder();
-		String actual = "10 20 30 40 50 ";
+		String actual = "10 20 40 50 30 ";
 		assertEquals(expected,actual);
 	}
 	
@@ -89,8 +86,33 @@ public class TestBTree {
 	@Test
 	public void testPostOrder(){
 		String expected = tree.getPostOrder();
-		String actual = "20 40 50 30 10 ";
+		String actual = "40 50 20 30 10 ";
 		assertEquals(expected,actual);
 	}
 	
+	/**
+	 * test when tree are mirror of each other.
+	 */
+	@Test
+	public void testWhenTreeAreMirror(){
+		BinaryTree<Integer> tree1 = new BinaryTree<Integer>();
+		BinaryTree<Integer> mirrorTree1 = new BinaryTree<Integer>();
+		tree1.insert(1);
+		tree1.insert(3);
+		tree1.insert(2);
+		tree1.insert(5);
+		tree1.insert(4);
+		tree1.insert(6);
+		tree1.insert(7);
+		mirrorTree1.insert(1);
+		mirrorTree1.insert(3);
+		mirrorTree1.insert(2);
+		mirrorTree1.insert(7);
+		mirrorTree1.insert(6);
+		mirrorTree1.insert(5);
+		mirrorTree1.insert(4);
+		boolean actual = tree1.mirror(mirrorTree);
+		boolean expected = false;
+		assertEquals(expected, actual);
+	}
 }
