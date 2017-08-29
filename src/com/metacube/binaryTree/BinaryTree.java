@@ -11,10 +11,10 @@ package com.metacube.binaryTree;
 public class BinaryTree<T> {
 
 	/** The root. */
-	BTNode<T> root;
+	private BTNode<T> root;
 
 	/** The post order. */
-	String inOrder,preOrder,postOrder;
+	private String inOrder,preOrder,postOrder;
 
 	/**
 	 * Instantiates a new binary tree.
@@ -38,7 +38,7 @@ public class BinaryTree<T> {
 			root = new BTNode<T>(data);
 		}
 		else{
-			if( root.left == null ){
+			if( root.left() == null ){
 				root.left = insert(root.left() , data);
 			}
 			else{
@@ -79,7 +79,7 @@ public class BinaryTree<T> {
 		if(root==null){
 			return ;
 		}
-		preOrder += root.data + " ";
+		preOrder += root.getData() + " ";
 		printPreOrder(root.left());
 		printPreOrder(root.right());
 	}
@@ -96,7 +96,7 @@ public class BinaryTree<T> {
 		}
 		printPostOrder(root.left());
 		printPostOrder(root.right());
-		postOrder += root.data+" ";
+		postOrder += root.getData()+" ";
 
 	}
 
@@ -111,7 +111,7 @@ public class BinaryTree<T> {
 			return ;
 		}
 		printInOrder(root.left());
-		inOrder+=root.data + " ";
+		inOrder+=root.getData() + " ";
 		printInOrder(root.right());
 	}
 
@@ -195,7 +195,7 @@ public class BinaryTree<T> {
 		if(newRoot == null || oldRoot==null)
 			return false;
 
-		return oldRoot.data.toString().equals(newRoot.data.toString()) && mirror(newRoot.left(),oldRoot.right()) && mirror(newRoot.right(),oldRoot.left());
+		return oldRoot.getData().toString().equals(newRoot.getData().toString()) && mirror(newRoot.left(),oldRoot.right()) && mirror(newRoot.right(),oldRoot.left());
 	}
 
 	/**

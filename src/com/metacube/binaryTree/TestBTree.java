@@ -15,10 +15,10 @@ import org.junit.Test;
 public class TestBTree {
 
 	/** The tree. */
-	static BinaryTree<Integer> tree;
+	private static BinaryTree<Integer> tree;
 	
 	/** The mirror tree. */
-	static BinaryTree<Integer> mirrorTree;
+	private static BinaryTree<Integer> mirrorTree;
 	
 	/**
 	 * Test.
@@ -58,7 +58,7 @@ public class TestBTree {
 	 */
 	@Test
 	public void testRoot(){
-		Object expected = tree.getRoot().data;
+		Object expected = tree.getRoot().getData();
 		Object actual = 10;
 		assertEquals(expected,actual);
 	}

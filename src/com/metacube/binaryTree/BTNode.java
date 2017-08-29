@@ -9,13 +9,27 @@ package com.metacube.binaryTree;
 public class BTNode<T> {
 	
 	/** The data. */
-	T data;
+	private T data;
 	
+	/**
+	 * @return the data
+	 */
+	public T getData() {
+		return data;
+	}
+
+	/**
+	 * @param data the data to set
+	 */
+	public void setData(T data) {
+		this.data = data;
+	}
+
 	/** The left. */
-	BTNode<T> left;
+	public BTNode<T> left;
 	
 	/** The right. */
-	BTNode<T> right;
+	public BTNode<T> right;
 	
 	/**
 	 * Instantiates a new BT node.
