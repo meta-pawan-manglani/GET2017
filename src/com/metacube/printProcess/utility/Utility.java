@@ -20,11 +20,6 @@ public class Utility {
 		try{
 		N = arr.length-1;
 		heapify(arr);
-		for (int index = N; index >= 0; index--)
-		{
-			swap(arr, 0, index);
-			maxheap(arr, 0);
-		}
 		/*Again putting the data into the queue*/
 		jobs.makeEmpty();
 		N = arr.length;
