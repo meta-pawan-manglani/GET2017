@@ -61,7 +61,7 @@ public class Main {
 				for(int index = 0 ; index < num ; index++){
 					System.out.println("Enter the element");
 					T data = (T)scan.next();
-					mirrorTree.insert(data);
+					mirrorTree.insertNode(data);
 				}
 				break;
 				/*Check if images are mirror images*/
