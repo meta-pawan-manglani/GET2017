@@ -38,26 +38,27 @@ public class BinaryTree<T> {
 	 *
 	 * @param root the root
 	 * @param data the data
-	 * @return node
 	 */
-	public boolean insert(T data) {
-		BTNode<T> newNode = new BTNode<>(data);
-		if (this.root == null) {
-			this.root = newNode;
-			parentNodes.enqueue(this.root);
-		} else {
-			BTNode<T> currentNode = parentNodes.getFront();
-			if (currentNode.getLeft() == null) {
-				currentNode.setLeft(newNode);
-				parentNodes.enqueue(currentNode.getLeft());
+	private void insert(T data) {
+		try {
+			BTNode<T> newNode = new BTNode<>(data);
+			if (this.root == null) {
+				this.root = newNode;
+				parentNodes.enqueue(this.root);
 			} else {
-				currentNode.setRight(newNode);
-				parentNodes.enqueue(currentNode.getRight());
-				parentNodes.dequeue();
+				BTNode<T> currentNode = parentNodes.getFront();
+				if (currentNode.getLeft() == null) {
+					currentNode.setLeft(newNode);
+					parentNodes.enqueue(currentNode.getLeft());
+				} else {
+					currentNode.setRight(newNode);
+					parentNodes.enqueue(currentNode.getRight());
+					parentNodes.dequeue();
+				}
 			}
+		}catch(Exception e) {
+			System.out.println("Error Caught while adding the element " + e.getMessage());
 		}
-
-		return true;
 	}
 
 	/**
@@ -109,7 +110,7 @@ public class BinaryTree<T> {
 	 * @param data the data
 	 */
 	public void insertNode(T data){
-		 insert(data);
+		insert(data);
 	}
 
 	/**
@@ -119,6 +120,9 @@ public class BinaryTree<T> {
 	 */
 	public String getInOrder(){
 		printInOrder(root);
+		if(inOrder.length()==0) {
+			inOrder = "Tree is empty";
+		}
 		return inOrder;
 	}
 
@@ -129,6 +133,9 @@ public class BinaryTree<T> {
 	 */
 	public String getPreOrder(){
 		printPreOrder(root);
+		if(preOrder.length()==0) {
+			preOrder = "Tree is empty";
+		}
 		return preOrder;
 	}
 
@@ -139,6 +146,9 @@ public class BinaryTree<T> {
 	 */
 	public String getPostOrder(){
 		printPostOrder(root);
+		if(postOrder.length()==0) {
+			postOrder = "Tree is empty";
+		}
 		return postOrder;
 	}
 
@@ -148,25 +158,35 @@ public class BinaryTree<T> {
 	 * @param root another tree
 	 * @return true, if successful
 	 */
-	public boolean mirror(BinaryTree<T> root){
-		/* In order of argument tree */ 
-		String inOrder1 = root.getInOrder();
-		/*In order of caller tree*/
-		String inOrder2 = this.getInOrder();
+	public boolean mirror(BinaryTree<T> tree){
 		boolean result = true;
-		/*If length is not equal then return false*/
-		if(inOrder1.length() != inOrder2.length()) {
-			result = false;
-		}
-		/*inOrder of tree 1 should be reverse of inOrder of tree 2*/ 
-		if(result) {
-			int len = inOrder1.length();
-			for(int index1 = 0,index2 = len-1 ; index1<len ; index1++,index2--) {
-				if(inOrder1.charAt(index1) != inOrder.charAt(index2)) {
+		try {
+			if((this.root ==null) && (tree.root == null)) {
+				result = true;
+			} else if(this.root ==null || tree.root == null){
+				result = false;
+			} else {
+				/* In order of argument tree */ 
+				String inOrder1 = tree.getInOrder();
+				/*In order of caller tree*/
+				String inOrder2 = this.getInOrder();
+				/*If length is not equal then return false*/
+				if(inOrder1.length() != inOrder2.length()) {
 					result = false;
-					break;
+				}
+				/*inOrder of tree 1 should be reverse of inOrder of tree 2*/ 
+				if(result) {
+					int len = inOrder1.length();
+					for(int index1 = 0,index2 = len-1 ; index1<len ; index1++,index2--) {
+						if(inOrder1.charAt(index1) != inOrder.charAt(index2)) {
+							result = false;
+							break;
+						}
+					}
 				}
 			}
+		}catch(Exception e) {
+			System.out.println("Error Caught checking the mirror " + e.getMessage());
 		}
 		/*return result*/
 		return result;
