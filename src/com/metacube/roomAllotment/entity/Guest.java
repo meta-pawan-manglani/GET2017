@@ -105,8 +105,6 @@ public class Guest {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		if (this.hashCode()!=obj.hashCode())
-			 return false;
 		Guest other = (Guest) obj;
 		if (age != other.age)
 			return false;
