@@ -66,7 +66,7 @@ public class AllotmentFacade {
 	public AllotmentFacade() {
 		rooms = new TreeMap<Integer, Boolean>();
 		infoList = new ArrayList<>();
-		for (int index = 0; index <= totalRooms; index++) {
+		for (int index = 1; index <= totalRooms; index++) {
 			rooms.put(index, true);
 		}
 	}
@@ -77,37 +77,44 @@ public class AllotmentFacade {
 	 * @param guest the guest
 	 * @return the room Number
 	 */
-	public int allotRooms(Guest guest) {
-		int hash = guest.hashCode();
-		hash = hash * num;
-		num++;
-		/**
-		 * Getting the room number
-		 */
-		int roomNumber = Math.abs(hash % totalRooms);
-		/**
-		 * If room is already full get another room which is free
-		 */
-		if (!rooms.get(roomNumber)) {
-			Set<Integer> set = rooms.keySet();
-			Iterator<Integer> itr = set.iterator();
+	public void allotRooms(Guest guest) {
+		int hash,roomNumber = 0;
+		try {
+			hash = guest.hashCode();
+			hash = hash * num;
+			num++;
 			/**
-			 * Check which room is free
+			 * Getting the room number
 			 */
-			while (itr.hasNext()) {
-				roomNumber = itr.next();
-				if (rooms.get(roomNumber)) {
-					break;
+			roomNumber = Math.abs(hash % totalRooms);
+			if(roomNumber==0) {
+				roomNumber++;
+			}
+			/**
+			 * If room is already full get another room which is free
+			 */
+			if (!rooms.get(roomNumber)) {
+				Set<Integer> set = rooms.keySet();
+				Iterator<Integer> itr = set.iterator();
+				/**
+				 * Check which room is free
+				 */
+				while (itr.hasNext()) {
+					roomNumber = itr.next();
+					if (rooms.get(roomNumber)) {
+						break;
+					}
 				}
 			}
+			/**
+			 * Allot that room to guest
+			 */
+			guest.setRoom(roomNumber);
+			infoList.add(guest);
+			rooms.put(roomNumber, false);
+		}catch(Exception e) {
+			System.out.println("Error in calculating the room number " + e.getMessage());
 		}
-		/**
-		 * Allot that room to guest
-		 */
-		guest.setRoom(roomNumber);
-		infoList.add(guest);
-		rooms.put(roomNumber, false);
-		return roomNumber;
 	}
 
 	/**
@@ -137,6 +144,9 @@ public class AllotmentFacade {
 		String allotment = "";
 		while (itr.hasNext()) {
 			allotment += itr.next().toString() + "\n";
+		}
+		if(allotment.length()==0) {
+			allotment = "No one is in Hotel";
 		}
 		return allotment;
 	}
