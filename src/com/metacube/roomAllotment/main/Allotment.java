@@ -61,7 +61,7 @@ public class Allotment {
 				int age = Input.takeIntegerAsInput();
 				System.out.println("Enter name of guest");
 				String name = Input.takeStringAsInput();
-				 guest = cl.getGuest(name, age);
+				guest = cl.getGuest(name, age);
 				if (guest != null) {
 					System.out.println("\nName : " + guest.getName() + "\tAge : " + guest.getAge() + "\tRoomNo. : " + guest.getRoom());
 				} else {
@@ -73,7 +73,7 @@ public class Allotment {
 				String result = cl.getAllGuest();
 				System.out.println(result);
 				break;
-			/**In case of exit*/
+				/**In case of exit*/
 			case 4:
 				Input.close();
 				System.exit(0);
@@ -115,7 +115,18 @@ public class Allotment {
 		System.out.println("Enter name of guest " + (index + 1));
 		String name = Input.takeStringAsInput();
 		System.out.println("Enter age of guest " + (index + 1));
-		int age = Input.takeIntegerAsInput();
+		int age = 0;
+		while(true) {
+			try {
+				age = Input.takeIntegerAsInput();
+				if(age<=0) {
+					throw new Exception("Age must be greater then zero");
+				}
+				break;
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
 		guest.addDetails(name, age);
 		return guest;
 	}
