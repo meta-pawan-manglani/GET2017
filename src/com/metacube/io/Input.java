@@ -35,12 +35,13 @@ public class Input {
 	 *
 	 * @return the int
 	 */
-	public static int takeIntegerAsInput() {
+	public static int takeIntegerAsInput(String s) {
 		boolean flag = true;
 		int input = 0;
 		String temp = "";
 		while (flag) {
 			try {
+				print("Enter " + s);
 				temp = in.nextLine().trim();
 				input = Integer.parseInt(temp);
 				flag = false;
@@ -56,10 +57,11 @@ public class Input {
 	 *
 	 * @return the String
 	 */
-	public static String takeStringAsInput() {
+	public static String takeStringAsInput(String s) {
 		String input = "";
 		while(true) {
 			try {
+				print("Enter " + s);
 				input = in.nextLine().trim();
 				if(input.length()==0){
 					throw new Exception("Blank Input");

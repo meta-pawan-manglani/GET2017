@@ -25,19 +25,20 @@ public class CountDistinctChar {
 	 */
 	private static int charCounter(String input) {
 		/*count store the total number of unique character*/
-		int count = 0,len = input.length();
+		int count,len;
+		/*removing white spaces from string*/
+		input = input.replaceAll("\\s+","").toLowerCase();
+		len = input.length();
+		count = len;
 		/*charArray helper to count occurrence of each character*/
-		int charArray[] = new int[26];
+		char charArray[] = input.toCharArray();
 		/*character c is helper*/
 		char c;
 		for(int index = 0 ; index < len ; index++) {
-			c = input.charAt(index);
-			/*If value at character position is zero*/
-			if(charArray[c-'a']==0) {
-				/*Increment the count*/
-				count++;
-				/*incrementing the value at character position*/
-				charArray[c-'a']++;
+			c = charArray[index];
+			if (index != input.indexOf(c)) {
+				/*if index is not same than decrement the count*/
+				count--;
 			}
 		}
 		return count;
@@ -83,11 +84,11 @@ public class CountDistinctChar {
 			/*Print menu*/
 			Input.printMenu();
 			/*Take user choice as input*/
-			choice = Input.takeIntegerAsInput();
+			choice = Input.takeIntegerAsInput("choice");
 			switch(choice) {
 			/*case for adding a new string*/
 			case 1:
-				input = Input.takeStringAsInput();
+				input = Input.takeStringAsInput("String");
 				Input.print("Number of Distinct Character in String " + input + " = " + getUniqueChar(input));
 				break;
 				/*In case of exit*/

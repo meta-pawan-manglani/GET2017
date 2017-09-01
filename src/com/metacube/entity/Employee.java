@@ -3,7 +3,6 @@
  * @version 1.1 28-Aug-2017
  */
 package com.metacube.entity;
-// TODO: Auto-generated Javadoc
 /**
  * The Class Employee.
  */
@@ -31,8 +30,12 @@ public class Employee implements Comparable<Employee>{
 	 * @param name the name
 	 * @param id the id
 	 * @param address the address
+	 * @throws Exception 
 	 */
-	public Employee(int id, String name, String address) {
+	public Employee(int id, String name, String address) throws Exception {
+		if(name ==null || address ==null) {
+			throw new Exception("Either the Field name or address or both are wrong");
+		}
 		this.name = name.trim().toUpperCase();
 		this.id = id;
 		this.address = address;
@@ -51,8 +54,12 @@ public class Employee implements Comparable<Employee>{
 	 * Sets the name.
 	 *
 	 * @param name the name to set
+	 * @throws Exception 
 	 */
-	public void setName(String name) {
+	public void setName(String name) throws Exception {
+		if(name == null) {
+			throw new Exception( "The Field name is wrong");
+		}
 		this.name = name.trim().toUpperCase();
 	}
 
@@ -87,8 +94,12 @@ public class Employee implements Comparable<Employee>{
 	 * Sets the address.
 	 *
 	 * @param address the address to set
+	 * @throws Exception 
 	 */
-	public void setAddress(String address) {
+	public void setAddress(String address) throws Exception {
+		if(address == null) {
+			throw new Exception("Field  address is wrong");
+		}
 		this.address = address;
 	}
 
@@ -146,12 +157,6 @@ public class Employee implements Comparable<Employee>{
 	 */
 	@Override
 	public int compareTo(Employee arg0) {
-		int result = 0;
-		if(this.id < arg0.id) {
-			result = -1;
-		} else if(this.id > arg0.id){
-			result = 1;
-		}
-		return result;
+		return this.getId() - arg0.getId();
 	}
 }

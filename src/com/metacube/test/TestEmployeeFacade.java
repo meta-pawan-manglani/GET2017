@@ -41,9 +41,10 @@ public class TestEmployeeFacade {
 	
 	/**
 	 * Test add employee.
+	 * @throws Exception 
 	 */
 	@Test
-	public void testAddEmployee() {
+	public void testAddEmployee() throws Exception {
 		Employee e = new Employee();
 		int id = 5;
 		String name = "pawan",address = "jpr";

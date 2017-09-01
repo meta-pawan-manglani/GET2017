@@ -32,8 +32,7 @@ public class EmployeeMain {
 				/*Printing menu*/
 				Input.printMenuForEmployee();
 				/*Taking user choice*/
-				Input.print("Enter Choice");
-				choice = Input.takeIntegerAsInput();
+				choice = Input.takeIntegerAsInput("choice");
 				switch(choice) {
 				/*For adding an employee into database*/
 				case 1:
@@ -75,35 +74,38 @@ public class EmployeeMain {
 	public static Employee createEmployee() {
 		Employee employee = new Employee();
 		String name="",address="";
-		int id;
-		while(true) {
-			/*taking id of employee as input*/
-			try {
-				Input.print("Enter Id of employee");
-				id = Input.takeIntegerAsInput();
-				employee.setId(id);
-				/*Check if id is duplicate*/
-				if(controller.checkDuplicate(employee)) {
-					/*In case of duplicate id*/
-					throw new Exception("Duplicate Id");
+		try {
+			int id;
+			while(true) {
+				/*taking id of employee as input*/
+				try {
+					Input.print("Enter Id of employee");
+					id = Input.takeIntegerAsInput("Id of Employee");
+					employee.setId(id);
+					/*Check if id is duplicate*/
+					if(controller.checkDuplicate(employee)) {
+						/*In case of duplicate id*/
+						throw new Exception("Duplicate Id");
+					}
+					break;
+				}catch(Exception e) {
+					Input.print("Error " + e.getMessage());
 				}
-				break;
-			}catch(Exception e) {
-				Input.print("Error " + e.getMessage());
 			}
+			/*Take name of employee*/
+			Input.print("Enter Name of Employee");
+			name = Input.takeStringAsInput("Name of Employee");
+
+			/*take address of employee*/
+			Input.print("Enter City of Employee");
+			address = Input.takeStringAsInput("City of Employee");
+
+			/*set these parameters*/
+			employee.setName(name);
+			employee.setAddress(address);
+		}catch(Exception e) {
+			Input.print(e.getMessage());
 		}
-		/*Take name of employee*/
-		Input.print("Enter Name of Employee");
-		name = Input.takeStringAsInput();
-
-		/*take address of employee*/
-		Input.print("Enter City of Employee");
-		address = Input.takeStringAsInput();
-
-		/*set these parameters*/
-		employee.setName(name);
-		employee.setAddress(address);
-
 		/*return employee object*/
 		return employee;
 	}
