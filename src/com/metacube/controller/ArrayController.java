@@ -14,24 +14,25 @@ public class ArrayController {
 	/* Returns index of x if it is present in numbers[l..r], else return -1 */
 	public static int binarySearch(int[] numbers,int left, int right, int key)
 	{
-		if (right>=left)
-		{
-			int mid = left + (right - left)/2;
+		if(numbers!=null) {
+			if (right>=left)
+			{
+				int mid = left + (right - left)/2;
 
-			/* If the element is present at the middle itself*/
-			if (( mid == 0 || key > numbers[mid-1]) && numbers[mid] == key) {
-				return mid;
-			}
-			/* If element is smaller than mid, then it can only
+				/* If the element is present at the middle itself*/
+				if (( mid == 0 || key > numbers[mid-1]) && numbers[mid] == key) {
+					return mid;
+				}
+				/* If element is smaller than mid, then it can only
 			 be present in left sub part of numbers */
-			if (key >numbers[mid]) {
-				return binarySearch(numbers,mid+1, right, key);
-			} 
-			/* Else the element can only be present in right
+				if (key >numbers[mid]) {
+					return binarySearch(numbers,mid+1, right, key);
+				} 
+				/* Else the element can only be present in right
 			 part of numbers */
-			return binarySearch(numbers,left, mid-1, key);
+				return binarySearch(numbers,left, mid-1, key);
+			}
 		}
-
 		/* We reach here when element is not present in numbers */
 		return -1;
 	}
