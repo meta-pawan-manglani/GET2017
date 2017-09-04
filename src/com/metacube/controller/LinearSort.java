@@ -59,7 +59,7 @@ public class LinearSort implements Sort {
 		/*exp is the exponent variable used to find the radix of element*/
 		int temp,exp = 1;
 		/*B is helping array which sorts the array element by there radix*/
-		int[] b = new int[10];
+		int[] b = new int[len];
 		/*this loop runs till the maximum value is not zero*/
 		while (max / exp > 0) {
 
