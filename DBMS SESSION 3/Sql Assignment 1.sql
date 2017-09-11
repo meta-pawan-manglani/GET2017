@@ -11,7 +11,7 @@ use lis;
  issue date of two or more entries are same than the data will be sorted by member name*/
 SELECT m.member_nm AS MemberName,b.member_id AS MemberId,t.title_nm AS TitleName,
 b.accession_no AS AccessionNo,b.issue_dt AS IssueDate,b.due_dt AS DueDate,
-IFNULL(r.return_dt,'Not Returned') AS ReturnDate,TIMESTAMPDIFF(DAY,b.issue_dt,r.return_dt) AS time
+IFNULL(r.return_dt,'Not Returned') AS ReturnDate,TIMESTAMPDIFF(DAY,b.issue_dt,IFNULL(r.return_dt,0)) AS time
 FROM book_issue b 
 /*join on table book and book_return*/
 left join book_return r on b.accession_no = r.accession_no and b.member_id = r.member_id
@@ -22,7 +22,7 @@ join books book on b.accession_no = book.accession_no
 /*joining titles using title id*/
 join titles t on book.title_id = t.title_id
 /*adding a condition which checks if time is more than 2 months or not*/
-where TIMESTAMPDIFF(DAY,b.issue_dt,r.return_dt) >= 60
+where TIMESTAMPDIFF(DAY,b.issue_dt,IFNULL(r.return_dt,0)) >= 60
 /*sort the result according to issue date and member name*/
 ORDER BY m.member_nm,t.title_nm;
 
