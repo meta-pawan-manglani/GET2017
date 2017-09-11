@@ -14,7 +14,7 @@ WHERE category = (SELECT category
                     FROM members WHERE member_nm = 'pawan13');
 
 /*This query will display the information of issued books*/
-SELECT i.issue_dt,i.due_dt,mb.member_nm,t.title_nm FROM book_issue bi 
+SELECT bi.issue_dt,bi.due_dt,mb.member_nm,t.title_nm FROM book_issue bi 
 /*joining book_return table and book_issue table*/
 JOIN book_return r ON r.return_dt IS NULL AND bi.accession_no = r.accession_no AND bi.member_id = r.member_id,
 books b 
@@ -22,14 +22,18 @@ books b
 JOIN titles t ON b.title_id = t.title_id,
 members mb 
 /*filter condition it takes the data from book_return table*/
-WHERE mb.member_id IN (SELECT r.member_id FROM book_return) AND b.accession_no IN (SELECT r.accession_no FROM book_return) ; 
+WHERE EXISTS (SELECT mb.member_nm FROM members WHERE r.member_id = mb.member_id );  
 
 /* This query will display the information of books which are not returned on time*/
 SELECT i.issue_dt,i.due_dt,r.return_dt,mb.member_nm,t.title_nm
-FROM book_issue i JOIN book_return r ON i.accession_no = r.accession_no AND i.member_id = r.member_id,
+FROM book_issue i
+/*joining table book_issue and book_return*/
+JOIN book_return r ON i.accession_no = r.accession_no AND i.member_id = r.member_id,
+/*joining table books and titles*/
 books b JOIN titles t ON b.title_id = t.title_id,
 members mb 
-WHERE DATEDIFF(r.return_dt,i.due_dt) >=1 AND mb.member_id IN (SELECT r.member_id FROM book_return) AND b.accession_no IN (SELECT r.accession_no FROM book_return) ;
+WHERE DATEDIFF(r.return_dt,i.due_dt) >=1 AND  EXISTS (SELECT mb.member_nm FROM members WHERE r.member_id = mb.member_id );
+
 
 /* This query will display the title of books which has price equivalent to highest price*/
 SELECT b.title_id,t.title_nm,b.price,b.accession_no FROM books b
