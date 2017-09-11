@@ -17,7 +17,7 @@ INSERT INTO `lis`.`members` (`member_id`, `member_nm`, `addressline1`, `addressl
 /*This query display total number of students,total number of faculty and others in different different row*/
 SELECT COUNT(category) as total_number,category FROM members 
 /*Grouping the result on category*/
-GROUP BY category NOT IN ('F','S')  , category IN ('S'), category in ('F');
+GROUP BY category;
 
 
 /*This query display total number of students,total number of faculty and others in single row*/
