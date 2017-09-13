@@ -34,17 +34,18 @@ LEFT JOIN members ON bi.member_id = members.member_id
 LEFT JOIN titles ON titles.title_id = (SELECT books.title_id FROM books WHERE books.accession_no = bi.accession_no)
 /*filter condition it takes the data from book_return table*/
  WHERE EXISTS (SELECT br.accession_no, br.member_id 
-                   FROM book_return br 
-                   WHERE DATEDIFF(br.return_dt,bi.due_dt) >=1 AND bi.member_id = br.member_id AND bi.accession_no = br.accession_no); 
+                      FROM book_return br
+                      WHERE br.member_id = bi.member_id AND br.accession_no = bi.accession_no and br.return_dt Is NULL); 
    
 /*case 3 when a entry is done in book return table only when book is returned*/
-   SELECT issue_date,titles.name AS 'Title',members.name AS 'Member name', due_date AS 'Due date'
+   SELECT issue_dt,titles.title_nm AS 'Title',members.member_nm AS 'Member name', due_dt AS 'Due date'
    FROM book_issue bi 
-   JOIN members ON bi.member_id = members.id
-   JOIN titles ON titles.id = (SELECT title_id FROM books WHERE bi.accession_no = books.accession_no) 
+   JOIN members ON bi.member_id = members.member_id
+   JOIN titles ON titles.title_id = (SELECT title_id FROM books WHERE bi.accession_no = books.accession_no) 
    WHERE NOT EXISTS (SELECT br.accession_no, br.member_id 
                        FROM book_return br
-                       WHERE br.member_id = bi.member_id AND br.accession_no = bi.accession_no); 
+                       WHERE br.member_id = bi.member_id AND br.accession_no = bi.accession_no)
+                       GROUP BY (bi.member_id);
 
 /*This query will display the information of books which are returned after due date*/
 SELECT bi.issue_dt AS 'Issue date',titles.title_nm AS 'Title',members.member_nm AS 'Member name', due_dt  AS 'Due date'
