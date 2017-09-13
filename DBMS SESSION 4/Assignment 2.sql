@@ -26,11 +26,10 @@ DROP VIEW IF EXISTS MemberDetails;
 CREATE VIEW MemberDetails
 AS
 /*making of view*/
-SELECT member_nm,member_id,category
+SELECT member_nm,member_id,IF(category='S','Student',IF(category='F','Faculty','Others')) AS Category
 FROM members;
 /*This query will display the view members*/
-SELECT member_nm,member_id,IF(category='S','Student',IF(category='F','Faculty','Others')) AS Category
-FROM MemberDetails;
+SELECT member_nm,member_id FROM MemberDetails;
 
 /*This command will drop view of BookDetails if exists*/
 DROP VIEW IF EXISTS BookDetails;
@@ -40,7 +39,7 @@ AS
 /*making of view selecting column which has to be displayed in view*/
 SELECT mb.member_nm,s.subject_nm,t.title_nm,mb.category,i.issue_dt,i.due_dt,r.return_dt FROM book_issue i 
 /*joining table book_return and book_issue*/
-JOIN book_return r ON i.accession_no = r.accession_no AND i.member_id = r.member_id
+LEFT JOIN book_return r ON i.accession_no = r.accession_no AND i.member_id = r.member_id
 /*joining table book_issue and books*/
 JOIN books b ON i.accession_no = b.accession_no
 /*joining table titles and books*/
