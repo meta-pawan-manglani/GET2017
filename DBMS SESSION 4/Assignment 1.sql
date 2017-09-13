@@ -44,8 +44,7 @@ LEFT JOIN titles ON titles.title_id = (SELECT books.title_id FROM books WHERE bo
    JOIN titles ON titles.title_id = (SELECT title_id FROM books WHERE bi.accession_no = books.accession_no) 
    WHERE NOT EXISTS (SELECT br.accession_no, br.member_id 
                        FROM book_return br
-                       WHERE br.member_id = bi.member_id AND br.accession_no = bi.accession_no)
-                       GROUP BY (bi.member_id);
+                       WHERE br.member_id = bi.member_id AND br.accession_no = bi.accession_no);
 
 /*This query will display the information of books which are returned after due date*/
 SELECT bi.issue_dt AS 'Issue date',titles.title_nm AS 'Title',members.member_nm AS 'Member name', due_dt  AS 'Due date'
@@ -69,6 +68,6 @@ JOIN titles t ON b.title_id = t.title_id
 WHERE b.price = ( SELECT MAX(price) FROM books WHERE purchase_dt IS NOT NULL);
 
 /* This query will display book which have second highest price*/
-SELECT MAX(price)AS SecondMaximum,title_id FROM books
+SELECT MAX(price)AS SecondMaximum FROM books
 /*filter condition which select the price which has price lower than highest price*/
-WHERE price < (SELECT MAX(price) FROM BOOKS); 
+WHERE price < (SELECT MAX(price) FROM BOOKS);
