@@ -55,10 +55,13 @@ public class DBConnection {
 			connection = DriverManager.getConnection(prop.getProperty("MYSQLJDBC.Url"),prop.getProperty("MYSQLJDBC.Username"),prop.getProperty("MYSQLJDBC.Password"));
 		} catch (ClassNotFoundException e) {
 			Input.print("Error Occured while Creating Connection to Database " + e.getMessage()+"\n");
+			System.exit(0);
 		} catch (SQLException e) {
 			Input.print("Error Occured while Creating Connection to Database " + e.getMessage()+"\n");
+			System.exit(0);
 		} catch (Exception e) {
 			Input.print("Error Occured while Creating Connection to Database " + e.getMessage()+"\n");
+			System.exit(0);
 		}
 		return connection;
 	}

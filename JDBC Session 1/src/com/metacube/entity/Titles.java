@@ -14,6 +14,24 @@ public class Titles {
 
 	/** The title name. */
 	private String titleName;
+	
+	private String authorName;
+	
+	/**
+	 * @return the authorName
+	 */
+	public String getAuthorName() {
+		return authorName;
+	}
+
+	/**
+	 * @param authorName the authorName to set
+	 */
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+
+
 
 	/** The title id. */
 	private int titleId;

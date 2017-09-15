@@ -7,7 +7,6 @@ import com.metacube.DAO.BaseDao;
 import com.metacube.DAO.DAOFactory;
 import com.metacube.entity.Titles;
 import com.metacube.enums.DBType;
-import com.metacube.enums.Status;
 import com.metacube.io.Input;
 
 
@@ -81,21 +80,19 @@ public class LibraryFacade {
 	 * @param bookName the book name
 	 * @return the status of book
 	 */
-	public Status isAvailable(String bookName) {
-		Status result = Status.NOT_AVAILABLE;
+	public List<String> isAvailable(String bookName) {
+		List<String> bookStatus = null;
 		try {
 			/*check if book is available*/
-			if(dao.isAvailable(bookName) ) {
-				result = Status.AVAILABLE;
-			}
+			bookStatus = dao.showBooks(bookName);
 		} catch (SQLException e) {
 			Input.print("Database Error Occured while getting book details " + e.getMessage());
-			result = Status.Error_Occured;
+			bookStatus = null;
 		} catch (Exception e) {
 			Input.print("Error Occured while getting book details " + e.getMessage());
-			result = Status.Error_Occured;
+			bookStatus = null;
 		}
-		return result;
+		return bookStatus;
 	}
 
 	/**
@@ -116,6 +113,7 @@ public class LibraryFacade {
 		}
 		return noOfRows;
 	}
+
 
 	/**
 	 * Close.

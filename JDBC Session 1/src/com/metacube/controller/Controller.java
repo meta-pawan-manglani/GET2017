@@ -49,8 +49,10 @@ public class Controller {
 			/*else parsing the result to send it to view*/
 			result = "Author Name\t" + "Title Name\n";
 			Iterator<Titles> itr = titlesList.iterator();
+			Titles t;
 			while(itr.hasNext()) {
-				result += authorName + "\t\t" + itr.next().getTitleName() + "\n";
+				t = itr.next();
+				result += t.getAuthorName() + "\t\t" + t.getTitleName() + "\n";
 			}
 		}
 		result += "\n\n<------------------End--------------------->";
@@ -66,17 +68,17 @@ public class Controller {
 	 * @return the string Status of book
 	 */
 	public String isAvailable(String bookName) {
-		String result = "Book Is";
+		String result = "";
+		List<String> bookStatus;
 		bookName = bookName.toLowerCase();
 		/*get the operation status*/
-		Status answer = lf.isAvailable(bookName);
+		bookStatus= lf.isAvailable(bookName);
 		/*if book is available*/
-		if(answer == Status.AVAILABLE) {
-			result +=  " Available\n";
-		} else if(answer == Status.NOT_AVAILABLE) {
-			/*in case if book is not available*/
-			result += " Not Available\n";
-		} else {
+		if(bookStatus != null) {
+			for(String temp : bookStatus) {
+				result +=  temp + "\n";
+			}
+		}  else {
 			/*In case of error*/
 			result = Status.Error_Occured.toString() + "\n";
 		}

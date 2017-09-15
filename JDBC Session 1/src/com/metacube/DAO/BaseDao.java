@@ -9,6 +9,7 @@ import java.util.List;
 import com.metacube.entity.Titles;
 
 
+
 /**
  * The Interface BaseDao.
  *
@@ -32,8 +33,8 @@ public interface BaseDao {
 	 * @param bookName the book name
 	 * @return true, if book is available
 	 * @throws SQLException the SQL exception
-	 */
-	public boolean isAvailable(String bookName) throws SQLException;
+	 *//*
+	public boolean isAvailable(String bookName,int accessionNo) throws SQLException;*/
 
 	/**
 	 * Delete books.
@@ -43,10 +44,22 @@ public interface BaseDao {
 	 * @throws SQLException the SQL exception
 	 */
 	public int deleteBooks(int years) throws SQLException;
+	
+	
+	/**
+	 * Show books.
+	 *
+	 * @param bookName the book name
+	 * @return the list
+	 * @throws SQLException the SQL exception
+	 */
+	public List<String> showBooks(String bookName) throws SQLException;
 
 	/**
 	 * Close.
 	 * Closing the stream
+	 *
+	 * @throws SQLException the SQL exception
 	 */
 	public void close() throws SQLException;
 }
