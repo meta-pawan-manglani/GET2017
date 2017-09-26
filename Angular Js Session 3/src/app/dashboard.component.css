@@ -1,0 +1,30 @@
+.card-header {
+    display: block;
+    background-color: #FFFFFF;
+}
+
+.card {
+    display: block;
+    border: 2px solid #D0DEF7;
+    padding: 10px;
+    background-color: #D0DEF7;
+    text-align: center;
+    box-shadow: 0 0 9px 0px #5a5858;
+    margin: 20px;
+    transition: transform 1s;
+}
+.card:hover{
+    transform :scale(1.1,1.1);
+}
+
+.card-title {
+    background-color: #D0DEF7;
+    margin-block-start: 0px;
+}
+
+.card-body {
+    background-color: #FFFFFF;
+    padding: 6px;
+    width: 90%;
+    margin-left: 4%;
+}
