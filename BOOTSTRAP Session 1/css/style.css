@@ -110,6 +110,7 @@ h4 {
 
 #notification ,#photo-gallery,#favourites,#announcement,#section{
     padding : 10px;
+    margin-top: 10px;
 }
 
 .bell-icon ,.camera-icon,.heart-icon,.volume-icon {
@@ -119,6 +120,9 @@ h4 {
     border: 1px solid #ffffff;
     color: white;
     border-radius:20px;
+}
+.internal-notification,.internal-photo-gallery,.internal-favourites,.internal-announcement {
+    border-radius: 5px;
 }
 
 .internal-notification {
@@ -179,6 +183,10 @@ h4 {
 	margin-top: 2px;
 }
 
+.section-para {
+    padding: 10px;
+    margin-top: 15px;
+}
 
 footer {
     background-color: #ba5e5e;
