@@ -1,0 +1,45 @@
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="panel-body">
+        <div>
+          <button class="btn btn-success btn-sm custom-add-button" (click)="gotoAddProduct()"> Add Product</button>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Product Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let Product of products">
+                    <td>{{Product.id}}</td>
+                    <td>{{Product.name}} </td>
+                    <td>{{Product.price}}</td>
+                    <td>
+                      <button class="btn btn-info btn-sm " [routerLink]="['/detail',Product.id]">
+                    <span class="glyphicon glyphicon-list-alt"></span> Detail</button>
+
+                      <button class="btn btn-warning btn-sm " [routerLink]="['/product-edit',Product.id]">
+                    <span class="glyphicon glyphicon-pencil"></span></button>
+                      <button class="btn btn-danger btn-sm " (click)="delete(Product)">
+                    <span class="glyphicon glyphicon-trash"></span></button>
+                    </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="well" *ngIf="selectedProduct">
+    <h2>
+      {{selectedProduct.title | uppercase}} is selected Click On View Details
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+  </div>
+</div>
