@@ -1,0 +1,195 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 17, 2017, 3:08:12 PM
+    Author     : Pawan Manglani
+*/
+
+header {   
+    background-color : #c36464;
+    padding : 10px;
+    border-color: transparent;
+}
+
+.glyphicon.glyphicon-user {
+    background-color:#F0677C;
+    padding:10px;
+    font-size:15px;
+    border-radius:20px
+}
+#home {
+	background-color:#c36464;
+	font-color: #ffffff;
+}
+.navbar.container li a {
+	color:White;
+}
+
+.social-block button  {
+	border-radius: 0;
+	color: #ffffff;
+}
+
+
+.btn-fb {
+    background-color: #3B5998;
+}
+
+.btn-gplus {
+    background-color: #DD4B39;
+}
+
+.btn-tw {
+    background-color: #55ACEE;
+}
+
+.btn-li {
+    background-color: #0082CA;
+}
+
+.layer .row .panel-body span{
+	border: 1px solid #ccc;
+	padding: 3px;
+}
+
+.glyphicon .glyphicon-align-left {
+	padding: 5px;
+	background-color: #ffffff;
+}
+
+.glyphicon.glyphicon-comment {
+	padding: 5px;
+	background-color: #ffffff;
+}
+
+.glyphicon.glyphicon-info-sign {
+	padding: 5px;
+	background-color: #ffffff;
+}
+
+.glyphicon.glyphicon-edit {
+	padding: 5px;
+	background-color: #ffffff;
+}
+
+
+.navbar-heder {
+    border-color:#F0677C;
+}
+.navbar-header .icon-bar{
+    background-color:#662d2d;
+}
+
+@media (max-width: 767px) {
+    .navbar {
+        min-height: auto;
+    }
+}
+.navbar-inverse{
+    border-radius: 0;
+}
+.navbar-inverse .navbar-nav>.active>a {
+    background-color : #c36464;
+}
+.navbar{
+    border : 0;
+}
+
+h4 {
+    color : #c36464;
+    border-bottom: 3px solid #c36464;
+	padding-bottom: 8px;
+}
+
+.alert-success {
+    padding:10px;
+}
+
+#notification ,#photo-gallery,#favourites,#announcement,#section{
+    padding : 10px;
+    margin-top: 10px;
+}
+
+.bell-icon ,.camera-icon,.heart-icon,.volume-icon {
+    margin-top: 10px;
+    padding:10px;
+    font-size: 20px;
+    border: 1px solid #ffffff;
+    color: white;
+    border-radius:20px;
+}
+.internal-notification,.internal-photo-gallery,.internal-favourites,.internal-announcement {
+    border-radius: 5px;
+}
+
+.internal-notification {
+    background-color: #b3b300;
+    text-color: white;
+    text-align:center;
+    padding:20px;
+    color:white;
+}
+
+.internal-photo-gallery {
+    background-color: #ff5233;
+    text-color: white;
+    text-align:center;
+    padding:20px;
+    color:white;
+}
+
+.internal-favourites {
+    background-color: #339961;
+    text-color: white;
+    text-align:center;
+    padding:20px;
+    color:white;
+}
+
+.internal-announcement {
+    background-color: #990099;
+    text-color: white;
+    text-align:center;
+    padding:20px;
+    color:white;
+}
+.social-block {
+    background-color: #fcf4e8;;
+    text-align: center;
+    padding : 14px;
+	border-color: #faebd7;
+}
+
+.right-article {
+	background-color: #f2dede;
+	border-color : #ebcccc;
+	color: #a94442;
+}
+
+.panel-heading.compose {
+	background-color: #dff0d8;
+	border-color : #d0e9c6;
+	color: #3c763d;
+}
+
+.btn.btn-warning.send-message {
+	margin-top: 2px;
+}
+
+.btn.btn-success.save-draft {
+	margin-top: 2px;
+}
+
+.section-para {
+    padding: 10px;
+    margin-top: 15px;
+}
+
+footer {
+    background-color: #ba5e5e;
+    padding:1%;
+    color:#ffffff;
+}
