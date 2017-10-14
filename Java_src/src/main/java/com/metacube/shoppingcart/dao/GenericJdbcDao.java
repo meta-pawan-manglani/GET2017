@@ -59,6 +59,7 @@ public abstract class GenericJdbcDao<T, ID extends Serializable> implements Abst
 			Connection connection = connectionFactory.getConnection();
 			Statement stmt = connection.createStatement();
 			String query = "INSERT INTO " + getTableName() + " (name,price)"+" VALUES ('" +product.getName() +"','"+ product.getPrice() + "');";
+			/*throw new Exception("in save");*/
 			stmt.executeUpdate(query);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -82,6 +83,7 @@ public abstract class GenericJdbcDao<T, ID extends Serializable> implements Abst
 			return null;
 		} catch (Exception e) {
 			//TODO - Logging
+			System.out.println(e);
 			return null;
 		}
 	}
@@ -95,11 +97,11 @@ public abstract class GenericJdbcDao<T, ID extends Serializable> implements Abst
 			Connection connection = connectionFactory.getConnection();
 			Statement stmt = connection.createStatement();
 			ResultSet resultSet = stmt.executeQuery("SELECT * FROM " + getTableName());
-			List<T> userList = new ArrayList<>();
+			List<T> productList = new ArrayList<>();
 			while(resultSet.next()) {
-				userList.add(extractResultSetRow(resultSet));
+				productList.add(extractResultSetRow(resultSet));
 			}
-			return userList;
+			return productList;
 
 		} catch (Exception e) {
 			//TODO - Logging
