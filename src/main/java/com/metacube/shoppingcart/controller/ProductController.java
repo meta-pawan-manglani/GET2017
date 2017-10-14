@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.metacube.shoppingcart.facade.ProductFacade;
 import com.metacube.shoppingcart.modal.Product;
 import com.metacube.shoppingcart.dto.ProductDto;
@@ -51,7 +53,11 @@ public class ProductController {
 	 */
 	@RequestMapping(value="/get/{id}" , produces="application/json")
 	public @ResponseBody ProductDto getProductById(@PathVariable("id") int id) {
-		return productFacade.getProductById(id);
+		ProductDto result = productFacade.getProductById(id);
+		if(result == null) {
+			result = new ProductDto();
+		} 
+		return result;
 	}
 
 	/**
