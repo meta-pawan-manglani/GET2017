@@ -1,0 +1,25 @@
+header,footer{
+  background-color:#5777A8;
+  color: white;
+  text-align:center;
+  padding:20px; 
+  }
+  nav{
+  background-color: black;
+  color:white;
+  border-radius: 0;
+  border-top-color: #5777A8;
+  }
+  li{
+  list-style-type: none;
+  padding:10px;
+  font-size: 20px;
+  display: inline-block;
+  }
+  li:hover{
+  background-color: #5777A8;
+  cursor:pointer;
+  }
+  a{
+  color:white;
+  }
