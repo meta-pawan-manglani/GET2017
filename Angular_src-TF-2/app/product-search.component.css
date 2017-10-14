@@ -1,0 +1,33 @@
+.search-result{
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    width:195px;
+    height: 36px;
+    padding: 5px;
+    background-color: white;
+    cursor: pointer;
+    color: black;
+  }
+   .output {
+    position: absolute;
+    z-index: 10;
+   }
+  .search-result:hover {
+    color: #eee;
+    background-color: #607D8B;
+  }
+   
+  #search-box{
+    width: 200px;
+    height: 30px;
+    border-radius: 7px;
+    color: black;
+    margin-top: 17px;
+  }
+
+  .glyphicon glyphicon-search {
+    background-color: #5777A8;
+    border: 3px solid #5777A8;
+    font-size: 30px;
+  }

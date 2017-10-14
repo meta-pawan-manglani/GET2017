@@ -1,0 +1,21 @@
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+   margin-bottom: 50px;
+}
+.my-container {
+    padding-bottom: 50px;
+}
+footer {
+    position: fixed;
+    height: 50px;
+    background-color: #5777A8;;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 1;
+    padding: 30px;
+    text-align: center;
+}
