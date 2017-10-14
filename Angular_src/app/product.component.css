@@ -1,0 +1,16 @@
+.jumbotron {
+    background-color: #e2f2ff;
+}
+.jumbotron-sm { padding-top: 24px;
+    padding-bottom: 24px; }
+    .jumbotron small {
+    color: #FFF;
+    }
+.selected-product-detail {
+    text-align: center;
+    font-size: 18px;
+}
+
+.custom-add-button {
+    margin: 12px;
+}
