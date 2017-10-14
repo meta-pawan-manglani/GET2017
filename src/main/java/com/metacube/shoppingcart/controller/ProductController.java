@@ -51,7 +51,11 @@ public class ProductController {
 	 */
 	@RequestMapping(value="/get/{id}" , produces="application/json")
 	public @ResponseBody ProductDto getProductById(@PathVariable("id") int id) {
-		return productFacade.getProductById(id);
+		ProductDto result = productFacade.getProductById(id);
+		if(result == null) {
+			result = new ProductDto();
+		} 
+		return result;
 	}
 
 	/**
