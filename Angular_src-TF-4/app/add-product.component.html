@@ -1,0 +1,25 @@
+<div class=container>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4>Add Product</h4>
+        </div>
+        <div class="panel-body">
+
+            <div>
+                <label>Product Name:</label> <input #productName />
+            </div>
+            
+            <div>
+                <label>Product Price:</label> <input #productPrice />
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-success" (click)="add(productName.value, productPrice.value); productName.value=''; productPrice.value=''">
+                        Save
+            </button>
+            <button class="btn btn-info" (click)="goBack()">
+                        <span class="glyphicon glyphicon-arrow-left"></span>Cancel
+            </button>
+        </div>
+    </div>
+</div>
